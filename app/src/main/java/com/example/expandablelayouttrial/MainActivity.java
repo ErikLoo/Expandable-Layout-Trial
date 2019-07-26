@@ -1,10 +1,13 @@
 package com.example.expandablelayouttrial;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,15 +31,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+//        FloatingActionButton fab = findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         listView = (ExpandableListView) findViewById(R.id.lvExp);
         initData();
@@ -48,30 +51,29 @@ public class MainActivity extends AppCompatActivity {
 
         listDataHeader = new ArrayList<>();
         listHash = new HashMap<>();
-        listDataHeader.add("1");
-        listDataHeader.add("2");
-        listDataHeader.add("3");
-        listDataHeader.add("4");
+        listDataHeader.add("Time criteria");
+        listDataHeader.add("Location criteria");
+        listDataHeader.add("Other criteria");
 
         List<String> item_1 = new ArrayList<>();
-        item_1.add("the child of the first item");
+        item_1.add("time");
 
         List<String> item_2 = new ArrayList<>();
-        item_2.add("the child of the 2nd item 2");
-        item_2.add("the child of the 2nd item 2");
+        item_2.add("location");
+//        item_2.add("the child of the 2nd item 2");
 
         List<String> item_3 = new ArrayList<>();
-        item_3.add("the child of the 3rd item 3");
-        item_3.add("the child of the 3rd item 3");
+        item_3.add("other");
+//        item_3.add("the child of the 3rd item 3");
 
         List<String> item_4 = new ArrayList<>();
         item_4.add("the child of the 4nd item 4");
-        item_4.add("the child of the 4nd item 4");
+//        item_4.add("the child of the 4nd item 4");
 
         listHash.put(listDataHeader.get(0),item_1);
         listHash.put(listDataHeader.get(1),item_2);
         listHash.put(listDataHeader.get(2),item_3);
-        listHash.put(listDataHeader.get(3),item_4);
+//        listHash.put(listDataHeader.get(3),item_4);
     }
 
     @Override
@@ -94,5 +96,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void CheckWeekPressedInFrag(View v) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        SetupTimeFragment currentFragment = (SetupTimeFragment) fragmentManager.findFragmentById(R.id.time_fragmemt);
+
+        if (currentFragment==null) {
+            System.out.println("this is null!!!");
+        }
+        else {
+            currentFragment.WeekdayPressed(v);
+            System.out.println("this is not a null!!!!");
+        }
+    }
+
+    public void checkTracker(View v) {
+
     }
 }
