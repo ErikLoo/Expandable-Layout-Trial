@@ -133,8 +133,6 @@ public class SetupTimeFragment extends Fragment {
 
         seek_view_1 = (TextView) v.findViewById(R.id.seekView1);
 
-        my_test_view = (TextView) v.findViewById(R.id.my_test_view);
-
         seek_view_1.setText(Integer.toString(seek_bar.getProgress()/10));
 //
         seek_bar.setOnSeekBarChangeListener(

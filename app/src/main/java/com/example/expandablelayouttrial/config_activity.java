@@ -5,6 +5,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.Switch;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,11 +23,15 @@ public class config_activity extends AppCompatActivity {
     private ExpandableListAdapater listAdapter;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
+    private View myView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.config_page);
+        setContentView(R.layout.all_fragments);
+
+        setUp();
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 //        FloatingActionButton fab = findViewById(R.id.fab);
@@ -38,10 +44,49 @@ public class config_activity extends AppCompatActivity {
 //        });
 
 
-        listView = (ExpandableListView) findViewById(R.id.lvExp);
-        initData();
-        listAdapter = new ExpandableListAdapater(config_activity.this,listDataHeader,listHash);
-        listView.setAdapter(listAdapter);
+//        listView = (ExpandableListView) findViewById(R.id.lvExp);
+//        initData();
+//        listAdapter = new ExpandableListAdapater(config_activity.this,listDataHeader,listHash);
+//        listView.setAdapter(listAdapter);
+    }
+
+    private void setUp(){
+        setupData((TextView) findViewById(R.id.label_name_time),(Switch) findViewById(R.id.switch_time),(View) findViewById(R.id.my_time_frag) );
+        setupData((TextView) findViewById(R.id.label_name_location),(Switch) findViewById(R.id.switch_location),(View) findViewById(R.id.my_map_frag) );
+        setupData((TextView) findViewById(R.id.label_name_constraints),(Switch) findViewById(R.id.switch_contraints),(View) findViewById(R.id.my_constraint_frag) );
+    }
+
+    private void setupData(TextView tv,Switch sv,View cv){
+        tv.setTag(new dataHolder(sv,cv,false));
+        cv.setVisibility(View.GONE);
+    }
+
+    public  class dataHolder {
+        Switch switch_view;
+        View contentView;
+        boolean visible;
+
+        public dataHolder(Switch sv,View cv,boolean visible){
+            this.switch_view = sv;
+            this.contentView = cv;
+            this.visible = visible;
+        }
+
+        public void setFalse(){visible=false;}
+        public void setTrue(){visible=true;}
+    }
+
+    public void expand_and_collapse(View v){
+        dataHolder dataPoint = (dataHolder) v.getTag();
+
+        if(dataPoint.visible==false) {
+            dataPoint.contentView.setVisibility(View.VISIBLE);
+            dataPoint.setTrue();
+        }
+        else {
+            dataPoint.contentView.setVisibility(View.GONE);
+            dataPoint.setFalse();
+        }
     }
 
     private void initData() {

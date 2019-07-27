@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".config_activity"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Type in activity name"/>
+
+        <include
+            layout = "@layout/list_item_time" />
+
+        <include
+            layout="@layout/add_time_fragment"
+            android:id = "@+id/my_time_frag"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <include
+            layout = "@layout/list_item_location" />
+
+        <include
+            layout="@layout/add_map_fragment"
+            android:id = "@+id/my_map_frag"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <include
+            layout = "@layout/list_item_constraints" />
+
+        <include
+            layout="@layout/add_constraints_fragment"
+            android:id = "@+id/my_constraint_frag"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</ScrollView>
