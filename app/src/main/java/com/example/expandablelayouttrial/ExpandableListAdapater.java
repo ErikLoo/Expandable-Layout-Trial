@@ -135,11 +135,12 @@ public class ExpandableListAdapater extends BaseExpandableListAdapter {
 
         System.out.println("Group: " + getGroup(groupPosition) + "  " + "Child: " + childText);
 
-        LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         Integer childType = new Integer(getChildType(groupPosition, childPosition));
 
         if(convertView==null||!(convertView.getTag().equals(childType))) {
+
+            LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
             if(childType.equals(CHILD_TYPE_1 )) {
 
                 convertView = inflater.inflate(R.layout.add_time_fragment, null); //implement a checker to check the name of the activitye

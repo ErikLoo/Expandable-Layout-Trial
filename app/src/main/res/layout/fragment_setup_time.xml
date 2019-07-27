@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:translationY="14sp"
-    tools:context=".MainActivity">
+    android:translationY="14sp">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/test_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -24,7 +23,7 @@
         android:layout_width="27dp"
         android:layout_height="26dp"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="@dimen/spacing_between_weekdays"
+        android:layout_marginLeft="@dimen/spacing"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_click_color"
         android:onClick="CheckWeekPressedInFrag"
@@ -37,7 +36,7 @@
         android:layout_width="27dp"
         android:layout_height="26dp"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="@dimen/spacing_between_weekdays"
+        android:layout_marginLeft="@dimen/spacing"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_click_color"
         android:onClick="CheckWeekPressedInFrag"
@@ -50,7 +49,7 @@
         android:layout_width="27dp"
         android:layout_height="26dp"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="@dimen/spacing_between_weekdays"
+        android:layout_marginLeft="@dimen/spacing"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_click_color"
         android:onClick="CheckWeekPressedInFrag"
@@ -67,7 +66,7 @@
         android:layout_marginTop="20dp"
         android:text="Minutes"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/seekView"
+        app:layout_constraintStart_toEndOf="@+id/seekView1"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
@@ -157,7 +156,7 @@
         android:layout_width="27dp"
         android:layout_height="26dp"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="@dimen/spacing_between_weekdays"
+        android:layout_marginLeft="@dimen/spacing"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_click_color"
         android:onClick="CheckWeekPressedInFrag"
@@ -170,7 +169,7 @@
         android:layout_width="27dp"
         android:layout_height="26dp"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="@dimen/spacing_between_weekdays"
+        android:layout_marginLeft="@dimen/spacing"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_click_color"
         android:onClick="CheckWeekPressedInFrag"
@@ -183,7 +182,7 @@
         android:layout_width="27dp"
         android:layout_height="26dp"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="@dimen/spacing_between_weekdays"
+        android:layout_marginLeft="@dimen/spacing"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_click_color"
         android:onClick="CheckWeekPressedInFrag"
@@ -196,7 +195,7 @@
         android:layout_width="27dp"
         android:layout_height="26dp"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="@dimen/spacing_between_weekdays"
+        android:layout_marginLeft="@dimen/spacing"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_click_color"
         android:onClick="CheckWeekPressedInFrag"
@@ -212,7 +211,7 @@
         app:layout_constraintGuide_percent="0.63" />
 
     <SeekBar
-        android:id="@+id/seekBar2"
+        android:id="@+id/seekBar3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -221,7 +220,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
-        android:id="@+id/seekView"
+        android:id="@+id/seekView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -229,7 +228,18 @@
         android:layout_marginTop="20dp"
         android:text="@string/EnterPays_TextView_ZeroValue"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/test_view"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <TextView
+        android:id="@+id/my_test_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="120dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

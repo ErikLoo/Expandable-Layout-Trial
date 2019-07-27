@@ -1,29 +1,30 @@
 package com.example.expandablelayouttrial;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ExpandableListView;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ListView;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    private ExpandableListView listView;
-    private ExpandableListAdapater listAdapter;
-    private List<String> listDataHeader;
-    private HashMap<String,List<String>> listHash;
+    private AtomPayListAdapter adapter;
+    private View itemView;
+    private ImageButton button_edit;
+    private static final int REQUEST_CODE = 10;
+    private AtomPayment gAtomPayment;
+//    private ArrayList<activity_entry> entry_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,49 +32,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        FloatingActionButton fab = findViewById(R.id.fab);
+        button_edit = (ImageButton) findViewById(R.id.edit_button);
+
+        fab.setOnClickListener(new View.OnClickListener() { //set up the onclick listern for the floating action button
+            @Override
+            public void onClick(View view) {
+//                setupAddPaymentButton();
+                intialize_new_entry();
+            }
+        });
 
 
-        listView = (ExpandableListView) findViewById(R.id.lvExp);
-        initData();
-        listAdapter = new ExpandableListAdapater(this,listDataHeader,listHash);
-        listView.setAdapter(listAdapter);
-    }
+//        entry_list = new ArrayList<activity_entry>(); //initialize the array list
 
-    private void initData() {
-
-        listDataHeader = new ArrayList<>();
-        listHash = new HashMap<>();
-        listDataHeader.add("Time criteria");
-        listDataHeader.add("Location criteria");
-        listDataHeader.add("Other criteria");
-
-        List<String> item_1 = new ArrayList<>();
-        item_1.add("time");
-
-        List<String> item_2 = new ArrayList<>();
-        item_2.add("location");
-//        item_2.add("the child of the 2nd item 2");
-
-        List<String> item_3 = new ArrayList<>();
-        item_3.add("other");
-//        item_3.add("the child of the 3rd item 3");
-
-        List<String> item_4 = new ArrayList<>();
-        item_4.add("the child of the 4nd item 4");
-//        item_4.add("the child of the 4nd item 4");
-
-        listHash.put(listDataHeader.get(0),item_1);
-        listHash.put(listDataHeader.get(1),item_2);
-        listHash.put(listDataHeader.get(2),item_3);
-//        listHash.put(listDataHeader.get(3),item_4);
+        setupListViewAdapter();
     }
 
     @Override
@@ -98,20 +71,101 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void CheckWeekPressedInFrag(View v) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        SetupTimeFragment currentFragment = (SetupTimeFragment) fragmentManager.findFragmentById(R.id.time_fragmemt);
-
-        if (currentFragment==null) {
-            System.out.println("this is null!!!");
-        }
-        else {
-            currentFragment.WeekdayPressed(v);
-            System.out.println("this is not a null!!!!");
-        }
+    private void intialize_new_entry() {
+        itemView = null;
+        setupAddPaymentButton();
+        open_edit_page();
     }
 
-    public void checkTracker(View v) {
-
+    public void edit_configuration(View v)
+    {
+        //add a confirmation dialogue here: Entering edit mode will toggle off data labelling. Are you sure you would like to continue?
+        itemView = v; // pass the reference to a global view variable because View v can not be accessed in the inner loop
+//        Intent intent = new Intent("com.example.datacollectionapp.config_activity" );
+//        startActivityForResult(intent,REQUEST_CODE);
+        gAtomPayment = (AtomPayment) v.getTag();
+        open_edit_page();
     }
+
+    public void open_edit_page() {
+        Intent intent = new Intent("com.example.datacollectionapp.config_activity" );
+//        Intent intent = new Intent("com.example.datacollectionapp.config_activity" );
+//        intent.putExtra("push_data",gAtomPayment);
+        startActivityForResult(intent,REQUEST_CODE);
+    }
+
+    public void removeAtomPayOnClickHandler(View v) { // remove a list item
+        //add a remove confirmation here before actually removing the entry
+        itemView = v; // pass the reference to a global view variable because View v can not be accessed in the inner loop
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to remove this item: " + ((AtomPayment)itemView.getTag()).getName()+" ?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        AtomPayment itemToRemove = (AtomPayment)itemView.getTag();
+                        adapter.remove(itemToRemove);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel(); //do nothing if "no" is pressed
+                    }
+                });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+//    public void removeButton() {
+//        adapter.remove(gAtomPayment);
+//    }
+
+    private void setupListViewAdapter() {
+        adapter = new AtomPayListAdapter(MainActivity.this, R.layout.list_item, new ArrayList<AtomPayment>());
+        ListView atomPaysListView = (ListView)findViewById(R.id.EnterPays_atomPaysList);
+        atomPaysListView.setAdapter(adapter);
+    }
+
+    private void setupAddPaymentButton() { // add a list item
+        AtomPayment mAtomPayment = new AtomPayment("",0);
+     //   adapter.insert(mAtomPayment, 0);// add an entry to the specified index of the array
+        adapter.add(mAtomPayment);// add an entry to the end of the array adapter
+        gAtomPayment = mAtomPayment; //assign the value to a global variable;
+
+
+//        adapter.insert(new AtomPayment("", 0), 0);// create an entry after pushing the button
+    }
+
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+//                //set the text to string
+////                if(itemView!=null) { // triggering by clicking the edit button
+////                    AtomPayment itemToEdit = (AtomPayment) itemView.getTag(); //find that particular view
+////                    itemToEdit.setName(((AtomPayment) data.getSerializableExtra("return_data")).getName());
+////                } else { //triggering by clicking the fab button
+//////                    gAtomPayment.setName(((AtomPayment) data.getSerializableExtra("return_data")).getName());
+////                }
+//                update_data(data);
+//                adapter.notifyDataSetChanged();//notify the data set has changed and nay view reflecing the data set should referesh itself
+//        }
+//
+//        if (resultCode == RESULT_CANCELED) {
+//            //Log.d("TAG", "RESULT_CANCELED");
+//            removeButton();
+//        }
+//    }
+//
+//    private void update_data(Intent data){
+//        gAtomPayment.setName(((AtomPayment) data.getSerializableExtra("return_data")).getName());
+//        gAtomPayment.setHour(((AtomPayment) data.getSerializableExtra("return_data")).getHour());
+//        gAtomPayment.setMins(((AtomPayment) data.getSerializableExtra("return_data")).getMins());
+//        gAtomPayment.setRepeats(((AtomPayment) data.getSerializableExtra("return_data")).getRepeats());
+//        gAtomPayment.setDuration(((AtomPayment) data.getSerializableExtra("return_data")).getDuration());
+//        gAtomPayment.setLoation(((AtomPayment) data.getSerializableExtra("return_data")).getLocation());
+//        gAtomPayment.setConditions(((AtomPayment) data.getSerializableExtra("return_data")).getConditions());
+//    }
+
 }

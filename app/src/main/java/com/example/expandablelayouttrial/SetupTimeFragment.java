@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment;
 
 import com.webianks.library.scroll_choice.ScrollChoice;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -33,7 +35,8 @@ public class SetupTimeFragment extends Fragment {
     private String act_name;
 
     private SeekBar seek_bar;
-    private TextView seek_view;
+    private TextView seek_view_1;
+    private TextView my_test_view;
 
     Calendar currentTime;
 
@@ -119,7 +122,7 @@ public class SetupTimeFragment extends Fragment {
     }
 
     public void set_seek_bar(AtomPayment item_data) {
-        seek_bar = (SeekBar)v.findViewById(R.id.seekBar2);
+        seek_bar = (SeekBar)v.findViewById(R.id.seekBar3);
         int progress = 50;
 
         if(item_data.getDuration()!=null) {
@@ -128,8 +131,11 @@ public class SetupTimeFragment extends Fragment {
 
         seek_bar.setProgress(progress);  //set the defualt value of the seebar view to be 50
 
-        seek_view = (TextView) v.findViewById(R.id.seekView);
-        seek_view.setText(Integer.toString(seek_bar.getProgress()/10));
+        seek_view_1 = (TextView) v.findViewById(R.id.seekView1);
+
+        my_test_view = (TextView) v.findViewById(R.id.my_test_view);
+
+        seek_view_1.setText(Integer.toString(seek_bar.getProgress()/10));
 //
         seek_bar.setOnSeekBarChangeListener(
                 new SeekBar.OnSeekBarChangeListener() {
@@ -138,7 +144,9 @@ public class SetupTimeFragment extends Fragment {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                         progress_value = progress;
-                        seek_view.setText(Integer.toString(progress/10));
+                       seek_view_1.setText(String.valueOf(progress/10));
+//                        seek_view_1.setText("Jesus");
+//                        my_test_view.setText("1235");
                     }
 
                     @Override
@@ -148,7 +156,10 @@ public class SetupTimeFragment extends Fragment {
 
                     @Override
                     public void onStopTrackingTouch(SeekBar seekBar) {
-                        seek_view.setText(Integer.toString(progress_value/10));
+                        seek_view_1.setText(String.valueOf(progress_value/10));
+//                        seek_view.setText(Integer.toString(progress_value/10));
+//                        seek_view_1.setText("Jesu2s");
+//                        my_test_view.setText("1234");
                     }
                 }
         );

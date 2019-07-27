@@ -55,7 +55,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
-        android:id="@+id/seekBar"
+        android:id="@+id/seekBarX"
         android:layout_width="286dp"
         android:layout_height="26dp"
         android:layout_marginStart="179dp"

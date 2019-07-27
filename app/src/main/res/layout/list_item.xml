@@ -1,12 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+
     <TextView
-        android:id="@+id/ListItem"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp" />
+        android:id="@+id/atomPay_name"
+        android:layout_width="0sp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:shadowColor="#00696666" />
+
+    <ImageButton
+        android:id="@+id/edit_button"
+        android:layout_width="@dimen/width_button"
+        android:layout_height="fill_parent"
+        android:background="@color/colorPrimary"
+        android:onClick="edit_configuration"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <ImageButton
+        android:id="@+id/atomPay_removePay"
+        android:layout_width="@dimen/width_button"
+        android:layout_height="fill_parent"
+        android:background="@color/colorPrimary"
+        android:contentDescription="@string/app_name"
+        android:onClick="removeAtomPayOnClickHandler"
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
 </LinearLayout>
