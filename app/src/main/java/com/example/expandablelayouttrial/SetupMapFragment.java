@@ -76,4 +76,10 @@ public class SetupMapFragment extends Fragment implements OnMapReadyCallback {
     public void get_location_from_frag(AtomPayment data) {
         data.setLoation(address_view.getText().toString());
     }
+
+    public void setLocation(AtomPayment activity_data){
+        if(activity_data!=null && activity_data.getLocation()!=null){
+             address_view.setText(activity_data.getLocation());
+        }
+    }
 }

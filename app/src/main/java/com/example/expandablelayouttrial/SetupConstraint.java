@@ -37,6 +37,8 @@ public class SetupConstraint extends Fragment {
 
     private ListView atomPaysListView;
 
+    private String conditions;
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) { //don't use findByID here
 
         View view = inflater.inflate(R.layout.setup_constraints,container,false);
@@ -62,9 +64,23 @@ public class SetupConstraint extends Fragment {
 
     }
 
-    public void add_constraints(CheckBox check_view,boolean checked, String ID){
-        check_view.setTag(new dataHolder(checked,ID));
+    public void add_constraints(CheckBox check_view,boolean checked,String ID){
+
+        dataHolder mDataHolder = new dataHolder(checked,ID);
+
+        if(conditions!=null){
+            String[] condtion_input = conditions.split(",");
+
+            if(condtion_input[Integer.parseInt(ID)].replaceAll("\\[","").replaceAll("\\]","").trim().equals("1")) {
+                mDataHolder.setChecked(true);
+                checkStatus[Integer.parseInt(ID)] = 1;
+                check_view.setChecked(true);
+            }
+        }
+
+        check_view.setTag(mDataHolder);
     }
+
 
     public void checkTracker(View v) { //if one of the weekday was pressed
         dataHolder condition = (dataHolder) v.getTag();
@@ -100,4 +116,10 @@ public class SetupConstraint extends Fragment {
         data.setConditions(Arrays.toString(checkStatus));
     }
 
+    public void setConstraints(AtomPayment activity_data){
+        if(activity_data!=null&&activity_data.getConditions()!=null){
+            conditions = activity_data.getConditions();
+            setup_constraints();
+        }
+    }
 }

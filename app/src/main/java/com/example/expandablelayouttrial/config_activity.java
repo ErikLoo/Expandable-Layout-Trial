@@ -38,12 +38,25 @@ public class config_activity extends AppCompatActivity {
     String time_view_name = "Specify a time and date";
     String location_view_name = "Specify a location";
 
+    FragmentManager fragmentManager;
+    SetupTimeFragment timeFrag;
+    SetupMapFragment mapFrag;
+    SetupConstraint constraintFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_fragments);
         time_view = (TextView)findViewById(R.id.label_name_time);
+        location_view = (TextView) findViewById(R.id.label_name_location);
+
+
+        fragmentManager = getSupportFragmentManager();
+
+        timeFrag = (SetupTimeFragment) fragmentManager.findFragmentById(R.id.time_fragmemt);
+        mapFrag = (SetupMapFragment) fragmentManager.findFragmentById(R.id.map_frag);
+        constraintFrag = (SetupConstraint) fragmentManager.findFragmentById(R.id.constraint_frag);
+
         setUp();
         prepopulate();
     }
@@ -84,6 +97,14 @@ public class config_activity extends AppCompatActivity {
         if(dataPoint.visible==false) {
             dataPoint.contentView.setVisibility(View.VISIBLE);
             dataPoint.setTrue();
+
+            if(dataPoint.getID().equals("time")){
+                timeFrag.setTime(item_data);
+            } else if(dataPoint.getID().equals("location")){
+                mapFrag.setLocation(item_data);
+            }else if(dataPoint.getID().equals("constraints")){
+                constraintFrag.setConstraints(item_data);
+            }
         }
         else { //update when the view disappears
             dataPoint.contentView.setVisibility(View.GONE);
@@ -122,57 +143,48 @@ public class config_activity extends AppCompatActivity {
     }
 
     public void CheckWeekPressedInFrag(View v) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        SetupTimeFragment currentFragment = (SetupTimeFragment) fragmentManager.findFragmentById(R.id.time_fragmemt);
 
-        if (currentFragment==null) {
+        if (timeFrag==null) {
             System.out.println("this is null!!!");
         }
         else {
-            currentFragment.WeekdayPressed(v);
+            timeFrag.WeekdayPressed(v);
             System.out.println("this is not a null!!!!");
         }
     }
 
     public void checkTracker(View v) {
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        SetupConstraint currentFragment = (SetupConstraint) fragmentManager.findFragmentById(R.id.constraint_frag);
-
-        if (currentFragment==null) {
+        if (constraintFrag==null) {
             System.out.println("this is null!!!");
         }
         else {
-            currentFragment.checkTracker(v);
+            constraintFrag.checkTracker(v);
             System.out.println("this is not a null!!!!");
         }
     }
 
     public void updateTime(){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        SetupTimeFragment currentFragment = (SetupTimeFragment) fragmentManager.findFragmentById(R.id.time_fragmemt);
 
-        if (currentFragment==null) {
+        if (timeFrag==null) {
             System.out.println("this is null!!!");
         }
         else {
-            currentFragment.get_time_from_frag(item_data);
+            timeFrag.get_time_from_frag(item_data);
             if(item_data.getHour()!=null) {time_view_name = item_data.getHour()+ " : " + item_data.getMins();}
+            if(item_data.getRepeats()!=null) { time_view_name = time_view_name + getWeek(item_data.getRepeats());}
             time_view.setText(time_view_name);
             System.out.println("this is not a null!!!!");
         }
     }
 
     public void updateLocation(){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        SetupMapFragment currentFragment = (SetupMapFragment) fragmentManager.findFragmentById(R.id.map_frag);
 
-        if (currentFragment==null) {
+        if (mapFrag==null) {
             System.out.println("this is null!!!");
         }
         else {
-            currentFragment.get_location_from_frag(item_data);
-            location_view = (TextView) findViewById(R.id.label_name_location);
+            mapFrag.get_location_from_frag(item_data);
             location_view_name = item_data.getLocation();
             location_view.setText(location_view_name);
             System.out.println("this is not a null!!!!");
@@ -180,14 +192,14 @@ public class config_activity extends AppCompatActivity {
     }
 
     public void updateConstraints(){
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        SetupConstraint currentFragment = (SetupConstraint) fragmentManager.findFragmentById(R.id.constraint_frag);
 
-        if (currentFragment==null) {
+        if (constraintFrag==null) {
             System.out.println("this is null!!!");
         }
         else {
-            currentFragment.get_constraints_from_frag(item_data);
+            constraintFrag.get_constraints_from_frag(item_data);
+            TextView cV = (TextView) findViewById(R.id.label_name_constraints);
+//            cV.setText(item_data.getConditions());
             System.out.println("this is not a null!!!!");
         }
     }
@@ -288,8 +300,18 @@ public class config_activity extends AppCompatActivity {
             time_view_name = item_data.getHour()+ " : " + item_data.getMins();
             time_view.setText(time_view_name);
         }
-        if(item_data.getRepeats()!=null) {time_view_name = time_view_name + getWeek(item_data.getRepeats());}
-        if(item_data.getLocation()!=null) {location_view_name = item_data.getLocation();}
+        if(item_data.getRepeats()!=null) {
+            time_view_name = time_view_name + getWeek(item_data.getRepeats());
+            time_view.setText(time_view_name);
+        }
+        if(item_data.getLocation()!=null) {
+            location_view_name = item_data.getLocation();
+            location_view.setText(location_view_name);
+        }
+        if(item_data.getConditions()!=null) {
+            TextView cV = (TextView) findViewById(R.id.label_name_constraints);
+//            cV.setText(item_data.getConditions());
+        }
 
     }
 
@@ -312,11 +334,6 @@ public class config_activity extends AppCompatActivity {
         return mWeek;
     }
 
-
-    public AtomPayment getItemData(){
-        return item_data;
-    }
-    //need to read all the data into a data structure
 
 
 }
