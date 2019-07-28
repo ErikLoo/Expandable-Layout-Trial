@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     public void open_edit_page() {
         Intent intent = new Intent("com.example.datacollectionapp.config_activity" );
 //        Intent intent = new Intent("com.example.datacollectionapp.config_activity" );
-//        intent.putExtra("push_data",gAtomPayment);
+        intent.putExtra("push_data",gAtomPayment);
         startActivityForResult(intent,REQUEST_CODE);
     }
 
@@ -117,9 +117,9 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-//    public void removeButton() {
-//        adapter.remove(gAtomPayment);
-//    }
+    public void removeButton() {
+        adapter.remove(gAtomPayment);
+    }
 
     private void setupListViewAdapter() {
         adapter = new AtomPayListAdapter(MainActivity.this, R.layout.list_item, new ArrayList<AtomPayment>());
@@ -133,39 +133,38 @@ public class MainActivity extends AppCompatActivity {
         adapter.add(mAtomPayment);// add an entry to the end of the array adapter
         gAtomPayment = mAtomPayment; //assign the value to a global variable;
 
-
 //        adapter.insert(new AtomPayment("", 0), 0);// create an entry after pushing the button
     }
 
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
-//                //set the text to string
-////                if(itemView!=null) { // triggering by clicking the edit button
-////                    AtomPayment itemToEdit = (AtomPayment) itemView.getTag(); //find that particular view
-////                    itemToEdit.setName(((AtomPayment) data.getSerializableExtra("return_data")).getName());
-////                } else { //triggering by clicking the fab button
-//////                    gAtomPayment.setName(((AtomPayment) data.getSerializableExtra("return_data")).getName());
-////                }
-//                update_data(data);
-//                adapter.notifyDataSetChanged();//notify the data set has changed and nay view reflecing the data set should referesh itself
-//        }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+                //set the text to string
+//                if(itemView!=null) { // triggering by clicking the edit button
+//                    AtomPayment itemToEdit = (AtomPayment) itemView.getTag(); //find that particular view
+//                    itemToEdit.setName(((AtomPayment) data.getSerializableExtra("return_data")).getName());
+//                } else { //triggering by clicking the fab button
+////                    gAtomPayment.setName(((AtomPayment) data.getSerializableExtra("return_data")).getName());
+//                }
+                update_data(data);
+                adapter.notifyDataSetChanged();//notify the data set has changed and nay view reflecing the data set should referesh itself
+        }
+
+        if (resultCode == RESULT_CANCELED) {
+            //Log.d("TAG", "RESULT_CANCELED");
+            removeButton();
+        }
+    }
 //
-//        if (resultCode == RESULT_CANCELED) {
-//            //Log.d("TAG", "RESULT_CANCELED");
-//            removeButton();
-//        }
-//    }
-//
-//    private void update_data(Intent data){
-//        gAtomPayment.setName(((AtomPayment) data.getSerializableExtra("return_data")).getName());
-//        gAtomPayment.setHour(((AtomPayment) data.getSerializableExtra("return_data")).getHour());
-//        gAtomPayment.setMins(((AtomPayment) data.getSerializableExtra("return_data")).getMins());
-//        gAtomPayment.setRepeats(((AtomPayment) data.getSerializableExtra("return_data")).getRepeats());
-//        gAtomPayment.setDuration(((AtomPayment) data.getSerializableExtra("return_data")).getDuration());
-//        gAtomPayment.setLoation(((AtomPayment) data.getSerializableExtra("return_data")).getLocation());
-//        gAtomPayment.setConditions(((AtomPayment) data.getSerializableExtra("return_data")).getConditions());
-//    }
+    private void update_data(Intent data){
+        gAtomPayment.setName(((AtomPayment) data.getSerializableExtra("return_data")).getName());
+        gAtomPayment.setHour(((AtomPayment) data.getSerializableExtra("return_data")).getHour());
+        gAtomPayment.setMins(((AtomPayment) data.getSerializableExtra("return_data")).getMins());
+        gAtomPayment.setRepeats(((AtomPayment) data.getSerializableExtra("return_data")).getRepeats());
+        gAtomPayment.setDuration(((AtomPayment) data.getSerializableExtra("return_data")).getDuration());
+        gAtomPayment.setLoation(((AtomPayment) data.getSerializableExtra("return_data")).getLocation());
+        gAtomPayment.setConditions(((AtomPayment) data.getSerializableExtra("return_data")).getConditions());
+    }
 
 }

@@ -34,6 +34,8 @@ public class SetupMapFragment extends Fragment implements OnMapReadyCallback {
 
     private View v;
 
+
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) { //don't use findByID here
 
         View view = inflater.inflate(R.layout.setup_map_layout,container,false);
@@ -51,6 +53,8 @@ public class SetupMapFragment extends Fragment implements OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState);
 
         mMapView = (MapView) v.findViewById(R.id.map);
+        address_view = (EditText) v.findViewById(R.id.address_id);
+
 
         if(mMapView!=null) {
             mMapView.onCreate(null);
@@ -67,5 +71,9 @@ public class SetupMapFragment extends Fragment implements OnMapReadyCallback {
         LatLng sydney = new LatLng(43.659580, -79.397668);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Toronto"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    public void get_location_from_frag(AtomPayment data) {
+        data.setLoation(address_view.getText().toString());
     }
 }

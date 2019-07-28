@@ -14,7 +14,7 @@
 
     <TextView
         android:id="@+id/label_name_constraints"
-        android:text="Specify constraints"
+        android:text="Other constraints"
         android:layout_width="319dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"

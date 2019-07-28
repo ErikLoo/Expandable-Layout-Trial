@@ -9,7 +9,7 @@
 
 
     <EditText
-        android:id="@+id/address"
+        android:id="@+id/address_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -37,7 +37,7 @@
         android:layout_marginTop="8dp"
         android:background="@android:drawable/ic_search_category_default"
         android:src="@android:drawable/ic_menu_search"
-        app:layout_constraintStart_toEndOf="@+id/address"
+        app:layout_constraintStart_toEndOf="@+id/address_id"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
     <com.google.android.gms.maps.MapView
@@ -65,6 +65,6 @@
         android:layout_marginRight="191dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/address" />
+        app:layout_constraintTop_toBottomOf="@+id/address_id" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

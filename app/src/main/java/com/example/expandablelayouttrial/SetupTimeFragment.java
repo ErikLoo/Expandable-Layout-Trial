@@ -1,5 +1,6 @@
 package com.example.expandablelayouttrial;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,6 +49,8 @@ public class SetupTimeFragment extends Fragment {
 
     private View v;
 
+    private AtomPayment activity_data;
+
 
     @Nullable
     @Override
@@ -55,16 +58,24 @@ public class SetupTimeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_setup_time,container,false);
         v = view;
+
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) { //do find by ID here
+        activity_data = ((config_activity) this.getActivity()).getItemData();
         setup_scroll_clock();
         set_seek_bar(new AtomPayment("",0));
         setup_the_week();
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
     }
 
     private void setup_scroll_clock(){
@@ -76,8 +87,16 @@ public class SetupTimeFragment extends Fragment {
         int default_min;
 
         currentTime = Calendar.getInstance();
-        default_hour= currentTime.get(Calendar.HOUR_OF_DAY);
-        default_min = currentTime.get(Calendar.MINUTE);
+
+        if(activity_data!=null && activity_data.getHour()!=null) { //if the saved data exist
+            default_hour = Integer.parseInt(activity_data.getHour());
+            default_min = Integer.parseInt(activity_data.getMins());
+        }
+        else {
+            currentTime = Calendar.getInstance();
+            default_hour= currentTime.get(Calendar.HOUR_OF_DAY);
+            default_min = currentTime.get(Calendar.MINUTE);
+        }
 
         hour = Integer.toString(default_hour);
         mins = Integer.toString(default_min);
@@ -142,6 +161,7 @@ public class SetupTimeFragment extends Fragment {
                     @Override
                     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                         progress_value = progress;
+                        duration = Integer.toString(progress_value);
                        seek_view_1.setText(String.valueOf(progress/10));
 //                        seek_view_1.setText("Jesus");
 //                        my_test_view.setText("1235");
@@ -158,6 +178,7 @@ public class SetupTimeFragment extends Fragment {
 //                        seek_view.setText(Integer.toString(progress_value/10));
 //                        seek_view_1.setText("Jesu2s");
 //                        my_test_view.setText("1234");
+                        duration = Integer.toString(progress_value);
                     }
                 }
         );
@@ -230,7 +251,14 @@ public class SetupTimeFragment extends Fragment {
         //record the current status of the weekdays
     }
 
-    public void someMethod () {
+    public void get_time_from_frag(AtomPayment data) {
+        data.setHour(hour);
+        data.setMins(mins);
+        data.setDuration(duration);
+    }
+
+    public void prepopulate(AtomPayment data){
+        //
 
     }
 

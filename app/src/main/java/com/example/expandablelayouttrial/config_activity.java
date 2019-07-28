@@ -1,13 +1,17 @@
 package com.example.expandablelayouttrial;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
@@ -19,45 +23,39 @@ import java.util.List;
 public class config_activity extends AppCompatActivity {
 
 
-    private ExpandableListView listView;
-    private ExpandableListAdapater listAdapter;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
     private View myView;
+
+    private AtomPayment item_data;
+
+    private String act_name;
+
+    private EditText act_name_view;
+    private TextView time_view;
+    private TextView location_view;
+
+    String time_view_name = "Specify a time and date";
+    String location_view_name = "Specify a location";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_fragments);
-
+        time_view = (TextView)findViewById(R.id.label_name_time);
         setUp();
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-
-//        listView = (ExpandableListView) findViewById(R.id.lvExp);
-//        initData();
-//        listAdapter = new ExpandableListAdapater(config_activity.this,listDataHeader,listHash);
-//        listView.setAdapter(listAdapter);
+        prepopulate();
     }
 
     private void setUp(){
-        setupData((TextView) findViewById(R.id.label_name_time),(Switch) findViewById(R.id.switch_time),(View) findViewById(R.id.my_time_frag) );
-        setupData((TextView) findViewById(R.id.label_name_location),(Switch) findViewById(R.id.switch_location),(View) findViewById(R.id.my_map_frag) );
-        setupData((TextView) findViewById(R.id.label_name_constraints),(Switch) findViewById(R.id.switch_contraints),(View) findViewById(R.id.my_constraint_frag) );
+        setupData((TextView) findViewById(R.id.label_name_time),(Switch) findViewById(R.id.switch_time),(View) findViewById(R.id.my_time_frag),"time");
+        setupData((TextView) findViewById(R.id.label_name_location),(Switch) findViewById(R.id.switch_location),(View) findViewById(R.id.my_map_frag),"location");
+        setupData((TextView) findViewById(R.id.label_name_constraints),(Switch) findViewById(R.id.switch_contraints),(View) findViewById(R.id.my_constraint_frag),"constraints");
     }
 
-    private void setupData(TextView tv,Switch sv,View cv){
-        tv.setTag(new dataHolder(sv,cv,false));
+    private void setupData(TextView tv,Switch sv,View cv,String Id){
+        tv.setTag(new dataHolder(sv,cv,false,Id));
         cv.setVisibility(View.GONE);
     }
 
@@ -65,15 +63,19 @@ public class config_activity extends AppCompatActivity {
         Switch switch_view;
         View contentView;
         boolean visible;
+        String Id;
 
-        public dataHolder(Switch sv,View cv,boolean visible){
+
+        public dataHolder(Switch sv,View cv,boolean visible,String Id){
             this.switch_view = sv;
             this.contentView = cv;
             this.visible = visible;
+            this.Id = Id;
         }
 
         public void setFalse(){visible=false;}
         public void setTrue(){visible=true;}
+        public String getID(){return Id;}
     }
 
     public void expand_and_collapse(View v){
@@ -83,39 +85,18 @@ public class config_activity extends AppCompatActivity {
             dataPoint.contentView.setVisibility(View.VISIBLE);
             dataPoint.setTrue();
         }
-        else {
+        else { //update when the view disappears
             dataPoint.contentView.setVisibility(View.GONE);
             dataPoint.setFalse();
+            if(dataPoint.getID().equals("time")) {
+                updateTime();
+            } else if(dataPoint.getID().equals("location")) {
+                updateLocation();
+            }else if(dataPoint.getID().equals("constraints"))
+            {
+                updateConstraints();
+            }
         }
-    }
-
-    private void initData() {
-
-        listDataHeader = new ArrayList<>();
-        listHash = new HashMap<>();
-        listDataHeader.add("Time criteria");
-        listDataHeader.add("Location criteria");
-        listDataHeader.add("Other criteria");
-
-        List<String> item_1 = new ArrayList<>();
-        item_1.add("time");
-
-        List<String> item_2 = new ArrayList<>();
-        item_2.add("location");
-//        item_2.add("the child of the 2nd item 2");
-
-        List<String> item_3 = new ArrayList<>();
-        item_3.add("other");
-//        item_3.add("the child of the 3rd item 3");
-
-        List<String> item_4 = new ArrayList<>();
-        item_4.add("the child of the 4nd item 4");
-//        item_4.add("the child of the 4nd item 4");
-
-        listHash.put(listDataHeader.get(0),item_1);
-        listHash.put(listDataHeader.get(1),item_2);
-        listHash.put(listDataHeader.get(2),item_3);
-//        listHash.put(listDataHeader.get(3),item_4);
     }
 
     @Override
@@ -155,5 +136,187 @@ public class config_activity extends AppCompatActivity {
 
     public void checkTracker(View v) {
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        SetupConstraint currentFragment = (SetupConstraint) fragmentManager.findFragmentById(R.id.constraint_frag);
+
+        if (currentFragment==null) {
+            System.out.println("this is null!!!");
+        }
+        else {
+            currentFragment.checkTracker(v);
+            System.out.println("this is not a null!!!!");
+        }
     }
+
+    public void updateTime(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        SetupTimeFragment currentFragment = (SetupTimeFragment) fragmentManager.findFragmentById(R.id.time_fragmemt);
+
+        if (currentFragment==null) {
+            System.out.println("this is null!!!");
+        }
+        else {
+            currentFragment.get_time_from_frag(item_data);
+            if(item_data.getHour()!=null) {time_view_name = item_data.getHour()+ " : " + item_data.getMins();}
+            time_view.setText(time_view_name);
+            System.out.println("this is not a null!!!!");
+        }
+    }
+
+    public void updateLocation(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        SetupMapFragment currentFragment = (SetupMapFragment) fragmentManager.findFragmentById(R.id.map_frag);
+
+        if (currentFragment==null) {
+            System.out.println("this is null!!!");
+        }
+        else {
+            currentFragment.get_location_from_frag(item_data);
+            location_view = (TextView) findViewById(R.id.label_name_location);
+            location_view_name = item_data.getLocation();
+            location_view.setText(location_view_name);
+            System.out.println("this is not a null!!!!");
+        }
+    }
+
+    public void updateConstraints(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        SetupConstraint currentFragment = (SetupConstraint) fragmentManager.findFragmentById(R.id.constraint_frag);
+
+        if (currentFragment==null) {
+            System.out.println("this is null!!!");
+        }
+        else {
+            currentFragment.get_constraints_from_frag(item_data);
+            System.out.println("this is not a null!!!!");
+        }
+    }
+
+
+
+
+
+    public void save_setting_data(View v) //onClick function associated with button "save"
+    {
+        act_name = act_name_view.getText().toString();
+
+        System.out.println("Print the name: " + act_name);
+
+        if(act_name.trim().length()<=0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("You have not named the activity yet!")
+                    .setCancelable(false)
+                    .setPositiveButton("Exit without saving", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            cancel();
+                        }
+                    })
+                    .setNegativeButton("Continue editing", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel(); //do nothing if "no" is pressed
+                        }
+                    });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        } else
+        {
+//            item_data.setName(act_name);
+            finish();
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() { //if the "back" key was pressed...
+
+        ready_to_cancel_activity();
+
+    }
+
+    public void cancel_edit(View v) { //if the "cancel" button has been pressed
+        ready_to_cancel_activity();
+    }
+
+    public void ready_to_cancel_activity() { //if the "back" key was pressed...
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to exit without saving?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        cancel();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel(); //do nothing if "no" is pressed
+                    }
+                });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+    }
+
+    public void finish( ) {
+        Intent data = new Intent();
+//        update_data();
+        item_data.setName(act_name);
+        data.putExtra("return_data",item_data);
+        setResult(RESULT_OK,data);
+        super.finish();
+    }
+
+
+    public void cancel() {
+        Intent data = new Intent();
+//        data.putExtra("return_data",item_data);
+//        data.putExtra("comment",comment);
+        setResult(RESULT_CANCELED,data);
+        super.finish();
+    }
+
+    private void prepopulate() {
+        item_data = (AtomPayment) getIntent().getSerializableExtra("push_data");
+        act_name_view = (EditText) findViewById(R.id.act_name);
+
+        if(item_data.getName()!=null) {act_name_view.setText(item_data.getName());}
+        if(item_data.getHour()!=null) {
+            time_view_name = item_data.getHour()+ " : " + item_data.getMins();
+            time_view.setText(time_view_name);
+        }
+        if(item_data.getRepeats()!=null) {time_view_name = time_view_name + getWeek(item_data.getRepeats());}
+        if(item_data.getLocation()!=null) {location_view_name = item_data.getLocation();}
+
+    }
+
+    private String getWeek(String weekdaystr)
+    {
+        String[] week = new String[]{"Su","Mon","Tu","We","Th","Fr","Sa"};
+        String mWeek = " ";
+        String[] weekday = weekdaystr.split(",");
+
+        System.out.println("Weehday: " + weekdaystr);
+
+        for(int i=0;i<7;i++)
+        {
+            if(weekday[i].replaceAll("\\[","").replaceAll("\\]","").trim().equals("1")) {
+////                System.out.println("Weekday: " + week[i]);
+                mWeek = mWeek + " " + week[i];
+            }
+        }
+
+        return mWeek;
+    }
+
+
+    public AtomPayment getItemData(){
+        return item_data;
+    }
+    //need to read all the data into a data structure
+
+
 }
