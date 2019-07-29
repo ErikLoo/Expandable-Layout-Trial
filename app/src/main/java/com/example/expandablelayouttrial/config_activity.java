@@ -62,9 +62,9 @@ public class config_activity extends AppCompatActivity {
     }
 
     private void setUp(){
-        setupData((TextView) findViewById(R.id.label_name_time),(Switch) findViewById(R.id.switch_time),(View) findViewById(R.id.my_time_frag),"time");
-        setupData((TextView) findViewById(R.id.label_name_location),(Switch) findViewById(R.id.switch_location),(View) findViewById(R.id.my_map_frag),"location");
-        setupData((TextView) findViewById(R.id.label_name_constraints),(Switch) findViewById(R.id.switch_contraints),(View) findViewById(R.id.my_constraint_frag),"constraints");
+        setupData((TextView) findViewById(R.id.timeCriteria),(Switch) findViewById(R.id.switch_time),(View) findViewById(R.id.my_time_frag),"time");
+        setupData((TextView) findViewById(R.id.locationCriteria),(Switch) findViewById(R.id.switch_location),(View) findViewById(R.id.my_map_frag),"location");
+        setupData((TextView) findViewById(R.id.constraintCriteria),(Switch) findViewById(R.id.switch_contraints),(View) findViewById(R.id.my_constraint_frag),"constraints");
     }
 
     private void setupData(TextView tv,Switch sv,View cv,String Id){
@@ -277,11 +277,18 @@ public class config_activity extends AppCompatActivity {
         Intent data = new Intent();
 //        update_data();
         item_data.setName(act_name);
+        updateAll();
         data.putExtra("return_data",item_data);
         setResult(RESULT_OK,data);
         super.finish();
     }
 
+    public void updateAll(){
+
+            updateTime();
+            updateLocation();
+            updateConstraints();
+        }
 
     public void cancel() {
         Intent data = new Intent();

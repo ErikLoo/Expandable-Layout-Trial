@@ -244,6 +244,7 @@ public class SetupTimeFragment extends Fragment {
 
     public void get_time_from_frag(AtomPayment data) {
         data.setHour(hour);
+        if(mins.length()<=1) {mins = "0"+mins;} //add a zero if the mins is single digit
         data.setMins(mins);
         data.setDuration(duration);
         data.setRepeats(Arrays.toString(weekday));

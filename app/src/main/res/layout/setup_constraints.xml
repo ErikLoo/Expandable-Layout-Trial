@@ -8,32 +8,32 @@
 
     <include
         layout="@layout/list_item_walking"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/list_item_height" />
 
     <include
         layout="@layout/list_item_showering"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/list_item_height" />
 
     <include
         layout="@layout/list_item_cooking"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/list_item_height" />
 
     <include
         layout="@layout/list_item_holding"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/list_item_height" />
 
     <include
         layout="@layout/list_item_looking"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/list_item_height" />
 
     <include
         layout="@layout/list_item_not_moving"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/list_item_height" />
 
 </LinearLayout>
