@@ -34,6 +34,7 @@ public class config_activity extends AppCompatActivity {
     private EditText act_name_view;
     private TextView time_view;
     private TextView location_view;
+    private Switch switch_view;
 
     String time_view_name = "Specify a time and date";
     String location_view_name = "Specify a location";
@@ -50,6 +51,9 @@ public class config_activity extends AppCompatActivity {
         time_view = (TextView)findViewById(R.id.label_name_time);
         location_view = (TextView) findViewById(R.id.label_name_location);
 
+        switch_view = (Switch) findViewById(R.id.switch_time);
+//        switch_view.
+//        switch_view.getTrackDrawable().setTintList(R.drawable.);
 
         fragmentManager = getSupportFragmentManager();
 
@@ -98,13 +102,13 @@ public class config_activity extends AppCompatActivity {
             dataPoint.contentView.setVisibility(View.VISIBLE);
             dataPoint.setTrue();
 
-            if(dataPoint.getID().equals("time")){
-                timeFrag.setTime(item_data);
-            } else if(dataPoint.getID().equals("location")){
-                mapFrag.setLocation(item_data);
-            }else if(dataPoint.getID().equals("constraints")){
-                constraintFrag.setConstraints(item_data);
-            }
+//            if(dataPoint.getID().equals("time")){
+//                timeFrag.setTime(item_data);
+//            } else if(dataPoint.getID().equals("location")){
+//                mapFrag.setLocation(item_data);
+//            }else if(dataPoint.getID().equals("constraints")){
+//                constraintFrag.setConstraints(item_data);
+//            }
         }
         else { //update when the view disappears
             dataPoint.contentView.setVisibility(View.GONE);
@@ -320,6 +324,9 @@ public class config_activity extends AppCompatActivity {
 //            cV.setText(item_data.getConditions());
         }
 
+        timeFrag.setTime(item_data);
+        mapFrag.setLocation(item_data);
+        constraintFrag.setConstraints(item_data);
     }
 
     private String getWeek(String weekdaystr)

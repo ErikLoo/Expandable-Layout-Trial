@@ -191,7 +191,7 @@ public class SetupTimeFragment extends Fragment {
         if(weekdata!=null) {
             String[] weekinput = weekdata.split(",");
             if(weekinput[id].replaceAll("\\[","").replaceAll("\\]","").trim().equals("1")) {
-                v.setBackgroundResource(R.drawable.redroundedbutton);
+                v.setBackgroundResource(R.drawable.circle);
                 mWeekday.setStatus(true);
                 weekday[id] = 1;
             }
@@ -230,7 +230,7 @@ public class SetupTimeFragment extends Fragment {
 
         if(isPressed==false) {
             mWeekday.setStatus(true);
-            my_v.setBackgroundResource(R.drawable.redroundedbutton);
+            my_v.setBackgroundResource(R.drawable.circle);
             weekday[mWeekday.getID()] = 1;
         }
         else {

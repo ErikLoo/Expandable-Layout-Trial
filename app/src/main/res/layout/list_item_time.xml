@@ -39,8 +39,11 @@
 
     <Switch
         android:id="@+id/switch_time"
+        android:thumbTint="@color/darkWhite"
+        android:trackTint="@color/track_selector"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:checked="false"
         android:shadowColor="#00696666" />
 
 </LinearLayout>

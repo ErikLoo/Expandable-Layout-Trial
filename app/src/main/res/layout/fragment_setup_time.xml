@@ -49,11 +49,11 @@
         android:layout_width="27dp"
         android:layout_height="26dp"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="@dimen/spacing"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_click_color"
         android:onClick="CheckWeekPressedInFrag"
         android:text="Sa"
+        android:textColor="@color/colorAccent"
         app:layout_constraintStart_toEndOf="@+id/fri5"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
@@ -69,37 +69,18 @@
         app:layout_constraintStart_toEndOf="@+id/seekView1"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="16dp"
-        android:text="Set a starting time"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="450dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.webianks.library.scroll_choice.ScrollChoice
             android:id="@+id/scroll_choice_hour"
@@ -148,8 +129,10 @@
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="179dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_end="410dp" />
+        app:layout_constraintGuide_begin="176dp"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/mon1"
@@ -195,11 +178,11 @@
         android:layout_width="27dp"
         android:layout_height="26dp"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="@dimen/spacing"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_click_color"
         android:onClick="CheckWeekPressedInFrag"
         android:text="Su"
+        android:textColor="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
@@ -207,8 +190,10 @@
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.63" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintGuide_begin="287dp" />
 
     <SeekBar
         android:id="@+id/seekBar3"
@@ -230,5 +215,12 @@
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/test_view"
         app:layout_constraintTop_toTopOf="@+id/guideline" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="353dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

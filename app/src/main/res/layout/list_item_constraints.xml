@@ -36,9 +36,10 @@
     </LinearLayout>
 
 
-
     <Switch
         android:id="@+id/switch_contraints"
+        android:thumbTint="@color/darkWhite"
+        android:trackTint="@color/track_selector"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:shadowColor="#00696666" />

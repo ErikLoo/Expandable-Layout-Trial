@@ -17,4 +17,10 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="mySwitchTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorControlActivated">@color/track_selector</item>
+        <item name="colorControlNormal">@color/track_selector</item>
+        <item name="trackTint">@color/darkWhite</item>
+    </style>
+
 </resources>
