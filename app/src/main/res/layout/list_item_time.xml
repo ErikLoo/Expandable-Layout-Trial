@@ -17,9 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Time criteria"
-            android:clickable="true"
             android:gravity="left|center"
-            android:onClick="expand_and_collapse"
             android:textColor="@android:color/black"
             android:background="?attr/selectableItemBackground"
             android:textSize="18sp" />
@@ -41,6 +39,7 @@
         android:id="@+id/switch_time"
         android:thumbTint="@color/darkWhite"
         android:trackTint="@color/track_selector"
+        android:onClick="expand_and_collapse"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:checked="false"

@@ -66,9 +66,7 @@ public class SetupTimeFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) { //do find by ID here
-        setup_scroll_clock();
-        set_seek_bar();
-        setup_the_week();
+        initData();
 
         super.onViewCreated(view, savedInstanceState);
     }
@@ -77,6 +75,13 @@ public class SetupTimeFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+    }
+
+    public void initData(){
+        weekdata = Arrays.toString(new int[] {0,0,0,0,0,0,0});
+        setup_scroll_clock();
+        set_seek_bar();
+        setup_the_week();
     }
 
     private void setup_scroll_clock(){
@@ -194,6 +199,11 @@ public class SetupTimeFragment extends Fragment {
                 v.setBackgroundResource(R.drawable.circle);
                 mWeekday.setStatus(true);
                 weekday[id] = 1;
+            }
+            else{
+                v.setBackgroundResource(R.drawable.whiteroundedbutton);
+                mWeekday.setStatus(false);
+                weekday[id] = 0;
             }
         }
         v.setTag(mWeekday);

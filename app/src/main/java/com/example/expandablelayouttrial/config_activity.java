@@ -44,6 +44,10 @@ public class config_activity extends AppCompatActivity {
     SetupMapFragment mapFrag;
     SetupConstraint constraintFrag;
 
+    Switch switch_time_view;
+    Switch switch_location_view;
+    Switch switch_constraint_view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,10 @@ public class config_activity extends AppCompatActivity {
         mapFrag = (SetupMapFragment) fragmentManager.findFragmentById(R.id.map_frag);
         constraintFrag = (SetupConstraint) fragmentManager.findFragmentById(R.id.constraint_frag);
 
+        switch_time_view = (Switch) findViewById(R.id.switch_time);
+        switch_location_view = (Switch) findViewById(R.id.switch_location);
+        switch_constraint_view = (Switch) findViewById(R.id.switch_contraints);
+
         setUp();
         prepopulate();
     }
@@ -72,19 +80,17 @@ public class config_activity extends AppCompatActivity {
     }
 
     private void setupData(TextView tv,Switch sv,View cv,String Id){
-        tv.setTag(new dataHolder(sv,cv,false,Id));
+        sv.setTag(new dataHolder(cv,false,Id));
         cv.setVisibility(View.GONE);
     }
 
     public  class dataHolder {
-        Switch switch_view;
         View contentView;
         boolean visible;
         String Id;
 
 
-        public dataHolder(Switch sv,View cv,boolean visible,String Id){
-            this.switch_view = sv;
+        public dataHolder(View cv,boolean visible,String Id){
             this.contentView = cv;
             this.visible = visible;
             this.Id = Id;
@@ -93,34 +99,73 @@ public class config_activity extends AppCompatActivity {
         public void setFalse(){visible=false;}
         public void setTrue(){visible=true;}
         public String getID(){return Id;}
+        public boolean getVisiblity(){return visible;}
     }
+//    public  class dataHolder {
+//        Switch switch_view;
+//        View contentView;
+//        boolean visible;
+//        String Id;
+//
+//
+//        public dataHolder(Switch sv,View cv,boolean visible,String Id){
+//            this.switch_view = sv;
+//            this.contentView = cv;
+//            this.visible = visible;
+//            this.Id = Id;
+//        }
+//
+//        public void setFalse(){visible=false;}
+//        public void setTrue(){visible=true;}
+//        public String getID(){return Id;}
+//    }
+
+//    public void expand_and_collapse(View v){
+//        dataHolder dataPoint = (dataHolder) v.getTag();
+//
+//        if(dataPoint.visible==false) {
+//            dataPoint.contentView.setVisibility(View.VISIBLE);
+//            dataPoint.setTrue();
+//
+//        }
+//        else { //update when the view disappears
+//            dataPoint.contentView.setVisibility(View.GONE);
+//            dataPoint.setFalse();
+//            if(dataPoint.getID().equals("time")) {
+//                updateTime();
+//            } else if(dataPoint.getID().equals("location")) {
+//                updateLocation();
+//            }else if(dataPoint.getID().equals("constraints"))
+//            {
+//                updateConstraints();
+//            }
+//        }
+//    }
 
     public void expand_and_collapse(View v){
         dataHolder dataPoint = (dataHolder) v.getTag();
 
-        if(dataPoint.visible==false) {
+        if(dataPoint.getVisiblity()==false) {
             dataPoint.contentView.setVisibility(View.VISIBLE);
             dataPoint.setTrue();
-
-//            if(dataPoint.getID().equals("time")){
-//                timeFrag.setTime(item_data);
-//            } else if(dataPoint.getID().equals("location")){
-//                mapFrag.setLocation(item_data);
-//            }else if(dataPoint.getID().equals("constraints")){
-//                constraintFrag.setConstraints(item_data);
-//            }
         }
         else { //update when the view disappears
             dataPoint.contentView.setVisibility(View.GONE);
             dataPoint.setFalse();
-            if(dataPoint.getID().equals("time")) {
-                updateTime();
-            } else if(dataPoint.getID().equals("location")) {
-                updateLocation();
-            }else if(dataPoint.getID().equals("constraints"))
-            {
-                updateConstraints();
+
+            if(dataPoint.getID().equals("time")){
+                time_view.setText("");
+                timeFrag.initData();
+
+            }else if(dataPoint.getID().equals("location")){
+                location_view.setText("");
+//                mapFrag.setLocation(item_data);
+
             }
+            else if(dataPoint.getID().equals("constraints")){
+//                constraintFrag.setConstraints(item_data);
+            }
+            //clean up the result
         }
     }
 
@@ -170,15 +215,28 @@ public class config_activity extends AppCompatActivity {
 
     public void updateTime(){
 
+        dataHolder timeData = (dataHolder) switch_time_view.getTag();
+
         if (timeFrag==null) {
             System.out.println("this is null!!!");
         }
         else {
-            timeFrag.get_time_from_frag(item_data);
-            if(item_data.getHour()!=null) {time_view_name = item_data.getHour()+ " : " + item_data.getMins();}
-            if(item_data.getRepeats()!=null) { time_view_name = time_view_name + getWeek(item_data.getRepeats());}
-            time_view.setText(time_view_name);
-            System.out.println("this is not a null!!!!");
+            if(timeData.getVisiblity()==true)
+            {
+                timeFrag.get_time_from_frag(item_data);
+                if(item_data.getHour()!=null) {time_view_name = item_data.getHour()+ " : " + item_data.getMins();}
+                if(item_data.getRepeats()!=null) { time_view_name = time_view_name + getWeek(item_data.getRepeats());}
+                time_view.setText(time_view_name);
+                System.out.println("this is not a null!!!!");
+            }
+            else{//cleanup the data
+                item_data.setHour(null);
+                item_data.setMins(null);
+                item_data.setRepeats(null);
+                item_data.setDuration(null);
+
+                time_view.setText("");//reset the text for time view
+            }
         }
     }
 
@@ -188,10 +246,20 @@ public class config_activity extends AppCompatActivity {
             System.out.println("this is null!!!");
         }
         else {
-            mapFrag.get_location_from_frag(item_data);
-            location_view_name = item_data.getLocation();
-            location_view.setText(location_view_name);
-            System.out.println("this is not a null!!!!");
+            dataHolder locationData = (dataHolder) switch_location_view.getTag();
+
+            if(locationData.getVisiblity()==true)
+            {
+                mapFrag.get_location_from_frag(item_data);
+                location_view_name = item_data.getLocation();
+                location_view.setText(location_view_name);
+                System.out.println("this is not a null!!!!");
+            }
+            else{
+                item_data.setLoation(null);
+
+                location_view.setText("");
+            }
         }
     }
 
@@ -201,10 +269,17 @@ public class config_activity extends AppCompatActivity {
             System.out.println("this is null!!!");
         }
         else {
-            constraintFrag.get_constraints_from_frag(item_data);
-            TextView cV = (TextView) findViewById(R.id.label_name_constraints);
+
+            dataHolder constraintData = (dataHolder) switch_constraint_view.getTag();
+
+            if(constraintData.getVisiblity()==true){
+                constraintFrag.get_constraints_from_frag(item_data);
+                TextView cV = (TextView) findViewById(R.id.label_name_constraints);
 //            cV.setText(item_data.getConditions());
-            System.out.println("this is not a null!!!!");
+                System.out.println("this is not a null!!!!");
+            }else {
+                item_data.setConditions(null);
+            }
         }
     }
 
@@ -310,6 +385,8 @@ public class config_activity extends AppCompatActivity {
         if(item_data.getHour()!=null) {
             time_view_name = item_data.getHour()+ " : " + item_data.getMins();
             time_view.setText(time_view_name);
+            expand_and_collapse(switch_time_view);//pressed the expand button
+            switch_time_view.setChecked(true);//pressed the expand button
         }
         if(item_data.getRepeats()!=null) {
             time_view_name = time_view_name + getWeek(item_data.getRepeats());
@@ -318,10 +395,16 @@ public class config_activity extends AppCompatActivity {
         if(item_data.getLocation()!=null) {
             location_view_name = item_data.getLocation();
             location_view.setText(location_view_name);
+
+            expand_and_collapse(switch_location_view);//pressed the expand button
+            switch_location_view.setChecked(true);//pressed the expand button
         }
         if(item_data.getConditions()!=null) {
             TextView cV = (TextView) findViewById(R.id.label_name_constraints);
 //            cV.setText(item_data.getConditions());
+
+            expand_and_collapse(switch_constraint_view);//pressed the expand button
+            switch_constraint_view.setChecked(true);//pressed the expand button
         }
 
         timeFrag.setTime(item_data);

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/pureWhite"
     android:translationY="0dp"
     tools:context=".config_activity">
 
@@ -100,7 +101,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#c0c0c0"/>
+                android:background="#c0c0c0" />
 
             <include
                 layout="@layout/list_item_time"
@@ -110,7 +111,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#c0c0c0"/>
+                android:background="#c0c0c0" />
 
             <include
                 android:id="@+id/my_time_frag"
@@ -127,7 +128,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#c0c0c0"/>
+                android:background="#c0c0c0" />
 
             <include
                 android:id="@+id/my_map_frag"
@@ -140,11 +141,6 @@
                 layout="@layout/list_item_constraints"
                 android:layout_width="match_parent"
                 android:layout_height="50dp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#c0c0c0"/>
 
             <include
                 android:id="@+id/my_constraint_frag"

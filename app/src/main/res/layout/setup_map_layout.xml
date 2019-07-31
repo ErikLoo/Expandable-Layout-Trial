@@ -50,13 +50,11 @@
 
     <SeekBar
         android:id="@+id/seekBarX"
-        android:layout_width="286dp"
+        android:layout_width="0dp"
         android:layout_height="26dp"
-        android:layout_marginStart="179dp"
-        android:layout_marginLeft="179dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="191dp"
-        android:layout_marginRight="191dp"
+        android:progressTint="@color/colorPrimary"
+        android:thumbTint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/address_id" />

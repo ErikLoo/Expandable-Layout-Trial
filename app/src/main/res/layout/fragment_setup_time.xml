@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:translationY="14sp">
+    android:background="@color/pureWhite">
 
     <TextView
         android:id="@+id/test_view"
@@ -87,14 +87,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@null"
+            android:backgroundTint="@null"
             app:scroll_atmospheric="true"
-            app:scroll_background_color="#F5f5f5"
+            app:scroll_background_color="@color/pureWhite"
             app:scroll_indicator="true"
             app:scroll_indicator_color="#FFF"
             app:scroll_item_align="center"
-            app:scroll_item_text_color="?attr/colorAccent"
-            app:scroll_selected_item_background="#FFF"
-            app:scroll_selected_item_text_color="#FFC107" />
+            app:scroll_item_text_color="@color/lightGrey"
+            app:scroll_selected_item_background="@color/pureWhite"
+            app:scroll_selected_item_text_color="@color/colorPrimary" />
 
         <com.webianks.library.scroll_choice.ScrollChoice
             android:id="@+id/scroll_choice_minute"
@@ -102,13 +104,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             app:scroll_atmospheric="true"
-            app:scroll_background_color="#F5f5f5"
+            app:scroll_background_color="#FFF"
             app:scroll_indicator="true"
             app:scroll_indicator_color="#FFF"
             app:scroll_item_align="center"
-            app:scroll_item_text_color="?attr/colorAccent"
+            app:scroll_item_text_color="@color/lightGrey"
             app:scroll_selected_item_background="#FFF"
-            app:scroll_selected_item_text_color="#FFC107" />
+            app:scroll_selected_item_text_color="@color/colorPrimary" />
 
     </LinearLayout>
 
@@ -200,6 +202,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
+        android:progressTint="@color/colorPrimary"
+        android:thumbTint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline" />

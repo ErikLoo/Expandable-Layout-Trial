@@ -20,9 +20,7 @@
             android:text="Location criteria"
             android:gravity="left|center"
             android:textColor="@android:color/black"
-            android:background="?attr/selectableItemBackground"
             android:clickable="true"
-            android:onClick="expand_and_collapse"
             android:textSize="18sp" />
 
 
@@ -46,6 +44,7 @@
         android:checked="false"
         android:shadowColor="#00696666"
         android:thumbTint="@color/darkWhite"
+        android:onClick="expand_and_collapse"
         android:trackTint="@color/track_selector" />
 
 </LinearLayout>
