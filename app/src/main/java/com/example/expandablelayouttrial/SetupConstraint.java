@@ -44,7 +44,9 @@ public class SetupConstraint extends Fragment {
         View view = inflater.inflate(R.layout.setup_constraints,container,false);
         v = view;
 
-        setup_constraints();
+//        setup_constraints();
+
+        initData();
         return view;
     }
 
@@ -52,6 +54,11 @@ public class SetupConstraint extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) { //do find by ID here
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void initData(){
+        conditions = Arrays.toString(new int[] {0,0,0,0,0,0});
+        setup_constraints();
     }
 
     public void setup_constraints(){
@@ -75,6 +82,11 @@ public class SetupConstraint extends Fragment {
                 mDataHolder.setChecked(true);
                 checkStatus[Integer.parseInt(ID)] = 1;
                 check_view.setChecked(true);
+            }
+            else{
+                mDataHolder.setChecked(false);
+                checkStatus[Integer.parseInt(ID)] = 0;
+                check_view.setChecked(false);
             }
         }
 

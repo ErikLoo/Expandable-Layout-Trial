@@ -159,11 +159,11 @@ public class config_activity extends AppCompatActivity {
 
             }else if(dataPoint.getID().equals("location")){
                 location_view.setText("");
-//                mapFrag.setLocation(item_data);
+                mapFrag.initData();
 
             }
             else if(dataPoint.getID().equals("constraints")){
-//                constraintFrag.setConstraints(item_data);
+                constraintFrag.initData();
             }
             //clean up the result
         }

@@ -53,8 +53,6 @@ public class SetupMapFragment extends Fragment implements OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState);
 
         mMapView = (MapView) v.findViewById(R.id.map);
-        address_view = (EditText) v.findViewById(R.id.address_id);
-
 
         if(mMapView!=null) {
             mMapView.onCreate(null);
@@ -62,6 +60,13 @@ public class SetupMapFragment extends Fragment implements OnMapReadyCallback {
             mMapView.getMapAsync(this);
         }
 
+        initData();
+
+    }
+
+    public void initData(){
+        address_view = (EditText) v.findViewById(R.id.address_id);
+        address_view.setText(null);
     }
 
     @Override

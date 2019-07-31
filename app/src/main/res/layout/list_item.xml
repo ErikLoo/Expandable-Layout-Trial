@@ -18,7 +18,8 @@
         android:id="@+id/switch2"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:shadowColor="#00696666" />
+        android:thumbTint="@color/darkWhite"
+        android:trackTint="@color/track_selector"/>
 
     <ImageButton
         android:id="@+id/edit_button"
