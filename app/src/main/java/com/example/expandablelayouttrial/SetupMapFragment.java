@@ -72,10 +72,14 @@ public class SetupMapFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
         // Add a marker in Sydney, Australia, and move the camera.
-        LatLng sydney = new LatLng(43.659580, -79.397668);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Toronto"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng toronto = new LatLng(43.659580, -79.397668); //input coordinates
+
+        //maybe a current location function here
+
+        mMap.addMarker(new MarkerOptions().position(toronto).title("Marker in Toronto"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(toronto));
     }
 
     public void get_location_from_frag(AtomPayment data) {

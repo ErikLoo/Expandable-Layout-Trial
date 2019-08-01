@@ -41,7 +41,7 @@ public class config_activity extends AppCompatActivity {
 
     FragmentManager fragmentManager;
     SetupTimeFragment timeFrag;
-    SetupMapFragment mapFrag;
+    SetupMapFragment_revised mapFrag;
     SetupConstraint constraintFrag;
 
     Switch switch_time_view;
@@ -62,7 +62,7 @@ public class config_activity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         timeFrag = (SetupTimeFragment) fragmentManager.findFragmentById(R.id.time_fragmemt);
-        mapFrag = (SetupMapFragment) fragmentManager.findFragmentById(R.id.map_frag);
+        mapFrag = (SetupMapFragment_revised) fragmentManager.findFragmentById(R.id.map_frag);
         constraintFrag = (SetupConstraint) fragmentManager.findFragmentById(R.id.constraint_frag);
 
         switch_time_view = (Switch) findViewById(R.id.switch_time);
