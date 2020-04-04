@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:layout_width="60dp"
+        android:layout_height="3dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/lightGrey"
+        app:layout_constraintBottom_toTopOf="@+id/textView16"
+        app:layout_constraintEnd_toStartOf="@+id/interact_view"
+        app:layout_constraintStart_toEndOf="@+id/msg_view1"
+        app:layout_constraintTop_toTopOf="@+id/interact_view" />
+
+    <View
+        android:layout_width="60dp"
+        android:layout_height="3dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/lightGrey"
+        app:layout_constraintBottom_toTopOf="@+id/textView17"
+        app:layout_constraintEnd_toStartOf="@+id/time_view"
+        app:layout_constraintStart_toEndOf="@+id/state_view"
+        app:layout_constraintTop_toTopOf="@+id/time_view" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="60dp"
+        android:layout_height="3dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/lightGrey"
+        app:layout_constraintBottom_toTopOf="@+id/textView15"
+        app:layout_constraintEnd_toStartOf="@+id/state_view"
+        app:layout_constraintStart_toEndOf="@+id/interact_view"
+        app:layout_constraintTop_toTopOf="@+id/state_view" />
+
+    <ImageView
+        android:id="@+id/time_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/incom_p"
+        app:layout_constraintStart_toEndOf="@+id/state_view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/interact_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="30dp"
+        android:src="@drawable/incom_p"
+        app:layout_constraintEnd_toStartOf="@+id/guideline10"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/msg_view1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="60dp"
+        android:src="@drawable/incom_p"
+        app:layout_constraintEnd_toStartOf="@+id/interact_view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/state_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/incom_p"
+        app:layout_constraintStart_toEndOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:text="Message"
+        android:textColor="@color/pureBlack"
+        app:layout_constraintEnd_toEndOf="@+id/msg_view1"
+        app:layout_constraintStart_toStartOf="@+id/msg_view1"
+        app:layout_constraintTop_toBottomOf="@+id/msg_view1" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:text="Interaction"
+        android:textColor="@color/pureBlack"
+        app:layout_constraintEnd_toEndOf="@+id/interact_view"
+        app:layout_constraintStart_toStartOf="@+id/interact_view"
+        app:layout_constraintTop_toBottomOf="@+id/interact_view" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:text="Time"
+        android:textColor="@color/pureBlack"
+        app:layout_constraintEnd_toEndOf="@+id/time_view"
+        app:layout_constraintStart_toStartOf="@+id/time_view"
+        app:layout_constraintTop_toBottomOf="@+id/time_view" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="State"
+        android:textColor="@color/pureBlack"
+        app:layout_constraintEnd_toEndOf="@+id/state_view"
+        app:layout_constraintStart_toStartOf="@+id/state_view"
+        app:layout_constraintTop_toBottomOf="@+id/state_view" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

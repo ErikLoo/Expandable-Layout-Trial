@@ -1,11 +1,12 @@
 package com.example.expandablelayouttrial;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -15,9 +16,6 @@ import androidx.fragment.app.Fragment;
 
 import com.webianks.library.scroll_choice.ScrollChoice;
 
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -49,8 +47,11 @@ public class SetupTimeFragment extends Fragment {
     private String duration;
     private String weekdata;
 
+    private Bundle savedStates;
+
     private View v;
 
+    private ImageView time_view;
 
     @Nullable
     @Override
@@ -59,14 +60,64 @@ public class SetupTimeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_setup_time,container,false);
         v = view;
 
-        //prepopulate();
 
+        time_view = getActivity().findViewById(R.id.time_view);
+
+        Button confirm_but = view.findViewById(R.id.next_step);
+
+
+//            private String[] fragList= {"rMsgFrag","qIFrag","ddlRFrag","qSFrag","qSSFrag","ssFrag","dDFrag","qTFrag","sTFrag","sumFrag"};
+
+        weekdata = Arrays.toString(new int[] {0,0,0,0,0,0,0});
+
+        savedStates = this.getArguments();
+
+        System.out.println("saved states");
+        System.out.println(savedStates==null);
+
+        if(savedStates!=null){
+//            load data from hisotry
+            if (savedStates.getString("Tweekday")!=null){
+                weekdata = savedStates.getString("Tweekday");
+                System.out.println("weekdata: " + weekdata);
+            }
+            if (savedStates.getString("Thour")!=null){ hour = savedStates.getString("Thour");}
+            if (savedStates.getString("Tmins")!=null){ mins = savedStates.getString("Tmins");}
+
+
+        }else{
+            //create a new data bundle if there is none
+            savedStates = new Bundle();
+        }
+
+        initData();
+
+
+        confirm_but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                time_view.setImageResource(R.drawable.pass_p);
+                savedStates.putInt("time_view",R.drawable.pass_p);
+
+                savedStates.putString("set_time_rmd","1");
+
+                savedStates.putIntArray("Tweekday_int",weekday);
+                savedStates.putString("Tweekday",Arrays.toString(weekday));
+                savedStates.putString("Thour",hour);
+                savedStates.putString("Tmins",mins);
+
+                ((NavigationHost) getActivity()).navigateTo("sumFrag",
+                        R.id.fragCon,true, "sumFrag", savedStates);
+            }
+        });
+        //prepopulate();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) { //do find by ID here
-        initData();
+//        initData();
 
         super.onViewCreated(view, savedInstanceState);
     }
@@ -77,12 +128,11 @@ public class SetupTimeFragment extends Fragment {
 
     }
 
-    public void initData(){
-        weekdata = Arrays.toString(new int[] {0,0,0,0,0,0,0});
+    private void initData(){
         setup_scroll_clock();
-        set_seek_bar();
         setup_the_week();
     }
+
 
     private void setup_scroll_clock(){
 
@@ -96,8 +146,22 @@ public class SetupTimeFragment extends Fragment {
         default_hour= currentTime.get(Calendar.HOUR_OF_DAY);
         default_min = currentTime.get(Calendar.MINUTE);
 
-        hour = Integer.toString(default_hour);
-        mins = Integer.toString(default_min);
+        if (hour!=null){
+            default_hour = Integer.parseInt(hour);
+
+//            System.out.println("hours: "+ default_hour + ", mins: " + default_min);
+        }else{
+            hour = Integer.toString(default_hour);
+        }
+
+        if (mins!=null){
+            default_min = Integer.parseInt(mins);
+
+//            System.out.println("mins: "+ default_hour + ", mins: " + default_min);
+        }else{
+            mins = Integer.toString(default_min);
+        }
+
 
         scrollChoiceHour.addItems(datasHour,default_hour); //set the default hour to the current hour
         scrollChoiceHour.setOnItemSelectedListener(new ScrollChoice.OnItemSelectedListener() {
@@ -138,45 +202,6 @@ public class SetupTimeFragment extends Fragment {
         scrollChoiceMins = (ScrollChoice) v.findViewById(R.id.scroll_choice_minute);
     }
 
-    public void set_seek_bar() {
-        seek_bar = (SeekBar)v.findViewById(R.id.seekBar3);
-        int progress = 50;
-
-        seek_bar.setProgress(progress);  //set the defualt value of the seebar view to be 50
-
-        seek_view_1 = (TextView) v.findViewById(R.id.seekView1);
-
-        seek_view_1.setText(Integer.toString(seek_bar.getProgress()/10));
-//
-        seek_bar.setOnSeekBarChangeListener(
-                new SeekBar.OnSeekBarChangeListener() {
-                    int progress_value;
-
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                        progress_value = progress;
-                        duration = Integer.toString(progress_value/10);
-                       seek_view_1.setText(String.valueOf(progress/10));
-//                        seek_view_1.setText("Jesus");
-//                        my_test_view.setText("1235");
-                    }
-
-                    @Override
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-
-                    }
-
-                    @Override
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-                        seek_view_1.setText(String.valueOf(progress_value/10));
-//                        seek_view.setText(Integer.toString(progress_value/10));
-//                        seek_view_1.setText("Jesu2s");
-//                        my_test_view.setText("1234");
-                        duration = Integer.toString(progress_value/10);
-                    }
-                }
-        );
-    }
 
     private void setup_the_week() {
         setup_weekday("Monday",(Button)v.findViewById(R.id.mon1),1);
@@ -188,7 +213,7 @@ public class SetupTimeFragment extends Fragment {
         setup_weekday("Sunday",(Button)v.findViewById(R.id.sun7),0);
     }
 
-    private void setup_weekday(String weekday2,View v,int id) {
+    private void setup_weekday(String weekday2, final View v, int id) {
         Weekday mWeekday = new Weekday(weekday2,false,id);
 
         System.out.println("Week in: " + weekdata);
@@ -207,11 +232,18 @@ public class SetupTimeFragment extends Fragment {
             }
         }
         v.setTag(mWeekday);
+
+        //set weekday listener
+        v.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                WeekdayPressed(v);
+            }
+        });
     }
 
 
-
-    public class Weekday{
+    private class Weekday{
         private String name;
         private boolean isPressed = false;
         private int id;
@@ -233,7 +265,7 @@ public class SetupTimeFragment extends Fragment {
     }
 
 
-    public void WeekdayPressed(View my_v) { //if one of the weekday was pressed
+    private void WeekdayPressed(View my_v) { //if one of the weekday was pressed
         Weekday mWeekday = (Weekday) my_v.getTag();
         String name = mWeekday.getName();
         boolean isPressed = mWeekday.getStatus();
@@ -249,55 +281,11 @@ public class SetupTimeFragment extends Fragment {
             weekday[mWeekday.getID()] = 0;
         }
 
+        System.out.println("my weekday" + weekdata);
         //record the current status of the weekdays
     }
 
-    public void get_time_from_frag(AtomPayment data) {
-        data.setHour(hour);
-        if(mins.length()<=1) {mins = "0"+mins;} //add a zero if the mins is single digit
-        data.setMins(mins);
-        data.setDuration(duration);
-        data.setRepeats(Arrays.toString(weekday));
-    }
 
-
-    public void setTime(AtomPayment activity_data){
-
-        if(activity_data!=null && activity_data.getDuration()!=null){
-            duration = activity_data.getDuration();
-            seek_view_1.setText(activity_data.getDuration());
-            seek_bar.setProgress(Integer.parseInt(activity_data.getDuration())*10);
-        }
-
-        if(activity_data!=null && activity_data.getHour()!=null) {
-            hour = activity_data.getHour();
-            mins = activity_data.getMins();
-
-            scrollChoiceHour.addItems(datasHour, Integer.parseInt(hour)); //set the default hour to the current hour
-            scrollChoiceHour.setOnItemSelectedListener(new ScrollChoice.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(ScrollChoice scrollChoice, int position, String name) {
-                    hour = name;
-                }
-            });
-
-
-            scrollChoiceMins.addItems(datasMins, Integer.parseInt(mins)); //set the defualt minute to the current minute
-            scrollChoiceMins.setOnItemSelectedListener(new ScrollChoice.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(ScrollChoice scrollChoice, int position, String name) {
-                    //do some action please
-                    mins = name;
-                }
-            });
-        }
-
-        if(activity_data!=null && activity_data.getRepeats()!=null) {
-            weekdata = activity_data.getRepeats();
-            setup_the_week();
-
-        }
-    }
 
 
 }

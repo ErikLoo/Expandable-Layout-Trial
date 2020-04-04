@@ -5,4 +5,30 @@
     <string name="EnterPays_TextView_ZeroValue">0</string>
     <string name="EnterPays_addPayment">Add Payment</string>
     <string name="the_second_activity">the second activity</string>
+    <string name="title_activity_remind_config_activity">remind_config_activity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="hour_prompt">delay</string>
+
+    <string-array name="hour_arrays">
+        <item>30 minutes</item>
+        <item>0 minute</item>
+        <item>60 minutes</item>
+        <item>2 hours</item>
+        <item>5 hours</item>
+    </string-array>
+
+    <string name="time_prompt">#</string>
+
+    <string-array name="time_arrays">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+    </string-array>
+
 </resources>

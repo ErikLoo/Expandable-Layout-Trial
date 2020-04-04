@@ -85,7 +85,7 @@
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:text="Intention"
+                android:text="Type in your reminder message"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
@@ -94,7 +94,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="Type in activity name"
+                android:hint="For example, turn off the stove"
+
                 android:textColor="@color/colorPrimary"
                 android:textSize="14sp" />
 

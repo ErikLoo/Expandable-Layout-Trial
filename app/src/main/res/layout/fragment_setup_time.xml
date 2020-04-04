@@ -6,29 +6,16 @@
     android:layout_height="wrap_content"
     android:background="@color/pureWhite">
 
-    <TextView
-        android:id="@+id/test_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="20dp"
-        android:text="Set duration"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <Button
         android:id="@+id/wed3"
         android:layout_width="27dp"
         android:layout_height="26dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="@dimen/spacing"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_click_color"
-        android:onClick="CheckWeekPressedInFrag"
         android:text="W"
-        app:layout_constraintStart_toEndOf="@+id/tue2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <Button
@@ -39,7 +26,6 @@
         android:layout_marginLeft="@dimen/spacing"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_click_color"
-        android:onClick="CheckWeekPressedInFrag"
         android:text="Th"
         app:layout_constraintStart_toEndOf="@+id/wed3"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
@@ -51,36 +37,34 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_click_color"
-        android:onClick="CheckWeekPressedInFrag"
         android:text="Sa"
         android:textColor="@color/colorAccent"
         app:layout_constraintStart_toEndOf="@+id/fri5"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/set_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"
-        android:text="Minutes"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Set time"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/seekView1"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/set_time">
 
         <com.webianks.library.scroll_choice.ScrollChoice
             android:id="@+id/scroll_choice_hour"
@@ -127,39 +111,26 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="179dp"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="176dp"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/mon1"
         android:layout_width="27dp"
         android:layout_height="26dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="@dimen/spacing"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/background_click_color"
-        android:onClick="CheckWeekPressedInFrag"
         android:text="M"
-        app:layout_constraintStart_toEndOf="@+id/sun7"
+        app:layout_constraintEnd_toStartOf="@+id/tue2"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <Button
         android:id="@+id/tue2"
         android:layout_width="27dp"
         android:layout_height="26dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="@dimen/spacing"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/background_click_color"
-        android:onClick="CheckWeekPressedInFrag"
         android:text="Tu"
-        app:layout_constraintStart_toEndOf="@+id/mon1"
+        app:layout_constraintEnd_toStartOf="@+id/wed3"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <Button
@@ -167,11 +138,9 @@
         android:layout_width="27dp"
         android:layout_height="26dp"
         android:layout_marginStart="20dp"
-        android:layout_marginLeft="@dimen/spacing"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_click_color"
-        android:onClick="CheckWeekPressedInFrag"
-        android:text="F"
+        android:text="Fri"
         app:layout_constraintStart_toEndOf="@+id/th4"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
@@ -179,13 +148,12 @@
         android:id="@+id/sun7"
         android:layout_width="27dp"
         android:layout_height="26dp"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/background_click_color"
-        android:onClick="CheckWeekPressedInFrag"
         android:text="Su"
         android:textColor="@color/colorAccent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/mon1"
         app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -195,36 +163,16 @@
         android:layout_marginBottom="200dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintGuide_begin="287dp" />
+        app:layout_constraintGuide_begin="245dp" />
 
-    <SeekBar
-        android:id="@+id/seekBar3"
-        android:layout_width="match_parent"
+
+    <Button
+        android:id="@+id/next_step"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:progressTint="@color/colorPrimary"
-        android:thumbTint="@color/colorPrimary"
+        android:text="CONFIRM"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
-
-    <TextView
-        android:id="@+id/seekView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/EnterPays_TextView_ZeroValue"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/test_view"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="353dp" />
-
+        app:layout_constraintTop_toBottomOf="@+id/wed3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

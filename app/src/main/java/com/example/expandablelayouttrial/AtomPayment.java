@@ -1,5 +1,7 @@
 package com.example.expandablelayouttrial;
 
+import android.os.Bundle;
+
 import java.io.Serializable;
 
 public class AtomPayment implements Serializable {
@@ -16,11 +18,15 @@ public class AtomPayment implements Serializable {
 	private String location;
 	private String conditions;
 	private boolean checked;
+	private Bundle fragData;
 
 	public AtomPayment(String name, double value) {
 		this.setName(name);
 		this.setValue(value);
 	}
+
+	public void setFragData(Bundle data){this.fragData = data; }
+	public Bundle getFragData(){return fragData;}
 
 	public String getName() {
 		return name;

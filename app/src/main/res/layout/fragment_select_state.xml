@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".selectStateFrag">
+
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="100dp"
+            android:text="Select all the frames that represent the state I need to identify"
+            android:textColor="@color/pureBlack"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/off_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:button="@drawable/off_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <ImageView
+            android:id="@+id/off_1_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/select_icon"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/off_1"
+            app:layout_constraintEnd_toEndOf="@+id/off_1" />
+
+
+        <CheckBox
+            android:id="@+id/off_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:button="@drawable/off_2"
+            app:layout_constraintEnd_toStartOf="@+id/off_3"
+            app:layout_constraintStart_toEndOf="@+id/off_1"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <ImageView
+            android:id="@+id/off_2_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/select_icon"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/off_2"
+            app:layout_constraintEnd_toEndOf="@+id/off_2" />
+
+
+        <CheckBox
+            android:id="@+id/off_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:button="@drawable/off_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <ImageView
+            android:id="@+id/off_3_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/select_icon"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/off_3"
+            app:layout_constraintEnd_toEndOf="@+id/off_3" />
+
+
+        <CheckBox
+            android:id="@+id/on_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:button="@drawable/on_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/off_1" />
+
+        <ImageView
+            android:id="@+id/on_1_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/select_icon"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/on_1"
+            app:layout_constraintEnd_toEndOf="@+id/on_1" />
+
+
+        <CheckBox
+            android:id="@+id/on_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:button="@drawable/on_2"
+            app:layout_constraintEnd_toStartOf="@+id/on_3"
+            app:layout_constraintStart_toEndOf="@+id/on_1"
+            app:layout_constraintTop_toBottomOf="@+id/off_3" />
+
+        <ImageView
+            android:id="@+id/on_2_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/select_icon"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/on_2"
+            app:layout_constraintEnd_toEndOf="@+id/on_2" />
+
+
+        <CheckBox
+            android:id="@+id/on_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:button="@drawable/on_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/off_2" />
+
+        <ImageView
+            android:id="@+id/on_3_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/select_icon"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/on_3"
+            app:layout_constraintEnd_toEndOf="@+id/on_3" />
+
+
+        <Button
+            android:id="@+id/next_step"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:text="NEXT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/on_2" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

@@ -12,6 +12,8 @@ import android.widget.ListView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton button_edit;
     private static final int REQUEST_CODE = 10;
     private AtomPayment gAtomPayment;
+    private Bundle fragData;
 //    private ArrayList<activity_entry> entry_list;
 
     @Override
@@ -35,19 +38,24 @@ public class MainActivity extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         button_edit = (ImageButton) findViewById(R.id.edit_button);
 
-        fab.setOnClickListener(new View.OnClickListener() { //set up the onclick listern for the floating action button
-            @Override
-            public void onClick(View view) {
-//                setupAddPaymentButton();
-                intialize_new_entry();
-            }
-        });
+
+//        fab.setOnClickListener(new View.OnClickListener() { //set up the onclick listern for the floating action button
+//            @Override
+//            public void onClick(View view) {
+////                setupAddPaymentButton();
+//                intialize_new_entry();
+//            }
+//        });
 
 
 //        entry_list = new ArrayList<activity_entry>(); //initialize the array list
 
         setupListViewAdapter();
+
+        initialize_demo_entries();
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,10 +79,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     private void intialize_new_entry() {
         itemView = null;
         setupAddPaymentButton();
         open_edit_page();
+    }
+
+    private void initialize_demo_entries(){
+        itemView = null;
+
+//        initialize two entries for demo purpose
+        setupAddPaymentButton();
+        setupAddPaymentButton();
     }
 
     public void edit_configuration(View v)
@@ -84,14 +101,37 @@ public class MainActivity extends AppCompatActivity {
 //        Intent intent = new Intent("com.example.datacollectionapp.config_activity" );
 //        startActivityForResult(intent,REQUEST_CODE);
         gAtomPayment = (AtomPayment) v.getTag();
+
+        if (gAtomPayment.getFragData()==null){
+            gAtomPayment.setFragData(new Bundle());
+        }
+
         open_edit_page();
     }
 
     public void open_edit_page() {
-        Intent intent = new Intent("com.example.datacollectionapp.config_activity" );
+        Intent intent = new Intent("com.example.datacollectionapp.remind_config_activity" );
 //        Intent intent = new Intent("com.example.datacollectionapp.config_activity" );
-        intent.putExtra("push_data",gAtomPayment);
+//        Intent intent = new Intent("com.example.datacollectionapp.config_activity" );
+//        if (gAtomPayment.getFragData()==null){
+//            gAtomPayment.setFragData(new Bundle());
+//        }
+        intent.putExtras(gAtomPayment.getFragData());
         startActivityForResult(intent,REQUEST_CODE);
+    }
+
+    //jump to the summary page
+    public void jumpToSummary(View v){
+        itemView = v; // pass the reference to a global view variable because View v can not be accessed in the inner loop
+
+        gAtomPayment = (AtomPayment) v.getTag();
+
+        if (gAtomPayment.getFragData()==null){
+            gAtomPayment.setFragData(new Bundle());
+        }
+
+        gAtomPayment.getFragData().putInt("jumpToSum",1);
+
     }
 
     public void removeAtomPayOnClickHandler(View v) { // remove a list item
@@ -147,24 +187,23 @@ public class MainActivity extends AppCompatActivity {
 //                } else { //triggering by clicking the fab button
 ////                    gAtomPayment.setName(((AtomPayment) data.getSerializableExtra("return_data")).getName());
 //                }
-                update_data(data);
+                //get data from frags
+                fragData = data.getExtras();
+
+                if(fragData!=null){
+                    if(fragData.getString("rMsg")!=null){
+                        gAtomPayment.setName(fragData.getString("rMsg"));
+                        gAtomPayment.setFragData(fragData);
+                    }
+                }
+
                 adapter.notifyDataSetChanged();//notify the data set has changed and nay view reflecing the data set should referesh itself
         }
 
         if (resultCode == RESULT_CANCELED) {
             //Log.d("TAG", "RESULT_CANCELED");
-            removeButton();
+//            removeButton();
         }
-    }
-//
-    private void update_data(Intent data){
-        gAtomPayment.setName(((AtomPayment) data.getSerializableExtra("return_data")).getName());
-        gAtomPayment.setHour(((AtomPayment) data.getSerializableExtra("return_data")).getHour());
-        gAtomPayment.setMins(((AtomPayment) data.getSerializableExtra("return_data")).getMins());
-        gAtomPayment.setRepeats(((AtomPayment) data.getSerializableExtra("return_data")).getRepeats());
-        gAtomPayment.setDuration(((AtomPayment) data.getSerializableExtra("return_data")).getDuration());
-        gAtomPayment.setLoation(((AtomPayment) data.getSerializableExtra("return_data")).getLocation());
-        gAtomPayment.setConditions(((AtomPayment) data.getSerializableExtra("return_data")).getConditions());
     }
 
 }

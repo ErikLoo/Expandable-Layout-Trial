@@ -4,7 +4,7 @@
     android:toDegrees="90">
     <shape
         android:shape="line">
-        <stroke android:width="2dp" android:color="#FFF"/>
+        <stroke android:width="2dp" android:color="#000000"/>
         <size android:height="20dp" />
     </shape>
 </rotate>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightGrey">
+        <TextView
+            android:id="@+id/set_delay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Interaction-based reminder"
+            android:textAlignment="center"
+            android:textColor="@color/pureWhite"
+            android:background="?attr/selectableItemBackground"
+            android:textSize="@dimen/inst_text_size"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id = "@+id/edit_button_i"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_menu_edit"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="The reminder will fire off when I "
+            android:textColor="@color/pureBlack"
+            android:textAlignment="center"
+            android:textSize="@dimen/inst_text_size"/>
+
+        <TextView
+            android:id = "@+id/see_val_i"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="see"
+            android:textColor="@color/pureBlack"
+            android:textAlignment="center"
+            android:textSize="@dimen/inst_text_size"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id = "@+id/interact_num_i"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="place holder"
+        android:layout_gravity="center"
+        android:textColor="@color/pureBlack"
+        android:textSize="@dimen/inst_text_size"/>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/stove_pic_hand" />
+
+    <TextView
+        android:id="@+id/conditions_i"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Triggering conditions to be filled"
+        android:textColor="@color/pureBlack"
+        android:textAlignment="center"
+        android:textSize="@dimen/inst_text_size"/>
+
+</LinearLayout>

@@ -2,6 +2,8 @@ package com.example.expandablelayouttrial;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -12,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.List;
 
 public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
@@ -45,8 +49,27 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 
 		holder = new AtomPaymentHolder();
 		holder.atomPayment = items.get(position);
+
+		holder.changeImg = (ImageView)row.findViewById(R.id.atomImage);
+
+
+//		holder.changeImg.setImageBitmap(myBitmap);
+//		holder.changeImg.setImageResource(R.drawable.circle);
+
+		if (position==0){
+			//change the image here
+//			holder.changeImg.setImageResource(R.drawable.circle);
+			holder.changeImg.setImageResource(R.drawable.stove_pic);
+		}
+		else{
+			holder.changeImg.setImageResource(R.drawable.plant_pic);
+		}
+
 		holder.removePaymentButton = (ImageButton)row.findViewById(R.id.atomPay_removePay);
 		holder.removePaymentButton.setTag(holder.atomPayment); //The tag of a view can store data
+
+//		holder.reviewButton = (ImageButton)row.findViewById(R.id.edit_button);
+//		holder.reviewButton.setTag(holder.atomPayment);
 
 		holder.editButton = (ImageButton)row.findViewById(R.id.edit_button);
 		holder.editButton.setTag(holder.atomPayment);
@@ -84,11 +107,33 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 		TextView value;
 		ImageButton removePaymentButton;
 		ImageButton editButton;
+		ImageButton reviewButton;
 		Switch switchButton;
+		ImageView changeImg;
 	}
 
 	private void swipeListener(final AtomPaymentHolder holder){
 		//mDetector = new GestureDetector(context, new MyGestureListener());
+		holder.changeImg.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				//Log.d("TAG", holder.name.getText() + "Has been touched");
+				//return mDetector.onTouchEvent(event);
+				if(event.getAction() == MotionEvent.ACTION_OUTSIDE){
+					//if(holder.atomPayment.getExtend()==true) retract_view(holder);
+					Log.d("TAG", "Fell outside");
+				}
+				if(event.getAction() == MotionEvent.ACTION_DOWN){
+
+					// Do what you want
+					animate_view(holder);
+					return true;
+				}
+				return false;
+			}
+
+		});
+
 		holder.name.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
@@ -189,25 +234,31 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 	}
 
 	private void initial_pos(final AtomPaymentHolder holder){
-		holder.name.setTranslationX(200);// move right
-		holder.switchButton.setVisibility(View.INVISIBLE);
-		holder.editButton.setVisibility(View.INVISIBLE);
-		holder.removePaymentButton.setVisibility(View.INVISIBLE);
+		holder.name.setTranslationX(100);// move right
+		holder.changeImg.setTranslationX(100);
+		holder.switchButton.setVisibility(View.GONE);
+		holder.editButton.setVisibility(View.GONE);
+//		holder.reviewButton.setVisibility(View.GONE);
+		holder.removePaymentButton.setVisibility(View.GONE);
 	}
 
 
 	private void extend_view(final AtomPaymentHolder holder) {
-		holder.name.animate(). translationX(-200);// move right
+		holder.name.animate(). translationX(-100);// move right
+		holder.changeImg.animate().translationX(-100);
 		holder.switchButton.setVisibility(View.VISIBLE);
 		holder.editButton.setVisibility(View.VISIBLE);
 		holder.removePaymentButton.setVisibility(View.VISIBLE);
 	}
 
 	private void retract_view(final AtomPaymentHolder holder) {
-		holder.name.animate(). translationX(200);// move right
-		holder.switchButton.setVisibility(View.INVISIBLE);
-		holder.editButton.setVisibility(View.INVISIBLE);
-		holder.removePaymentButton.setVisibility(View.INVISIBLE);
+		holder.name.animate(). translationX(100);// move right
+		holder.changeImg.animate(). translationX(100);// move right
+
+		holder.switchButton.setVisibility(View.GONE);
+		holder.editButton.setVisibility(View.GONE);
+//		holder.reviewButton.setVisibility(View.GONE);
+		holder.removePaymentButton.setVisibility(View.GONE);
 	}
 
 	private void setNameTextChangeListener(final AtomPaymentHolder holder) {
