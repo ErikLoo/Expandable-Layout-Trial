@@ -23,5 +23,15 @@
         <item name="trackTint">@color/darkWhite</item>
     </style>
 
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="SwitchTextAppearance" parent="@android:style/TextAppearance.Holo.Small">
+        <item name="android:textColor">@color/text_selector</item>
+        <item name="android:textSize">@dimen/inst_text_size</item>
+
+    </style>
+
 
 </resources>

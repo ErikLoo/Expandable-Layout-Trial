@@ -1,6 +1,7 @@
 package com.example.expandablelayouttrial;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,10 +9,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -68,6 +72,12 @@ public class delayDurationFrag extends myFragment {
         sw_in_view = view.findViewById(R.id.sw_in_view);
         sp_dl =view.findViewById(R.id.spinner1);
         sp_dur = view.findViewById(R.id.spinner2);
+
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.hour_arrays, R.layout.spinner_item_hour);
+        sp_dl.setAdapter(adapter);
+        sp_dur.setAdapter(adapter);
+
+//        ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.hour_arrays, R.layout.spinner_item);
 
 
         hold_off_remind = view.findViewById(R.id.hold_off_layout);
@@ -241,6 +251,7 @@ public class delayDurationFrag extends myFragment {
         }
 
     }
+
 
     public void saveStatus(){
         state_view.setImageResource(R.drawable.pass_p);

@@ -19,7 +19,7 @@
             android:layout_marginEnd="100dp"
             android:text="Select all the images that best represent the state I need to identify"
             android:textColor="@color/pureBlack"
-            android:textSize="20sp"
+            android:textSize="@dimen/inst_text_size"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

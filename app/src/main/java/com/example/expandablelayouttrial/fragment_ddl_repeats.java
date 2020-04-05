@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -95,6 +96,9 @@ public class fragment_ddl_repeats extends myFragment{
         sw_see  = view.findViewById(R.id.sw_see);
 
         num_interc_view = view.findViewById(R.id.spinner3);
+
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.time_arrays, R.layout.spinner_item);
+        num_interc_view.setAdapter(adapter);
 
         sw_see.setOnClickListener(new View.OnClickListener(){
             @Override

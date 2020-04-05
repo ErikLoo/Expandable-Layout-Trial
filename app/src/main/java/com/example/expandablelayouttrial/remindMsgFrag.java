@@ -115,7 +115,7 @@ public class remindMsgFrag extends myFragment {
 
 //                System.out.println("sStates: "+ savedStates.getString("rMsg"));
 
-                if(((EditText)v.findViewById(R.id.rmd_name)).getText().toString().length()>5){
+                if(((EditText)v.findViewById(R.id.rmd_name)).getText().toString().length()>=5){
                     saveStatus();
                     ((NavigationHost) getActivity()).navigateTo("qIFrag",
                             R.id.fragCon,true, "qIFrag", savedStates);

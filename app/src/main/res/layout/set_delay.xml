@@ -15,13 +15,12 @@
         android:textAlignment="center"
         android:textColor="@color/pureWhite"
         android:background="?attr/selectableItemBackground"
-        android:textSize="@dimen/inst_text_size"
-        android:textStyle="bold"/>
+        android:textSize="@dimen/inst_text_size" />
 
     <Switch
         android:id="@+id/sw_delay"
         android:thumbTint="@color/darkWhite"
-        android:trackTint="@color/track_selector"
+        android:trackTint="@color/track_selector_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="false"

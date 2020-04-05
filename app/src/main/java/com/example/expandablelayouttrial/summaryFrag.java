@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class summaryFrag extends myFragment {
     private View s_rmd;
     private View t_rmd;
     private TextView r_msg;
+    private View v;
 
     private Spinner sp_dl;
     private Spinner sp_dur;
@@ -38,6 +40,8 @@ public class summaryFrag extends myFragment {
     private String[] interact_array = {"0","1","2","3","4","5"};
     private String[] weekdays = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
 
+    private ListView i_list;
+
     public summaryFrag() {
         // Required empty public constructor
     }
@@ -48,6 +52,8 @@ public class summaryFrag extends myFragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_summary, container, false);
+
+        v = view;
 
         i_rmd = view.findViewById(R.id.i_rmd);
         s_rmd = view.findViewById(R.id.s_rmd);
@@ -61,6 +67,7 @@ public class summaryFrag extends myFragment {
         edit_but_i = view.findViewById(R.id.edit_button_t);
 
 
+
         savedStates = this.getArguments();
 
         if(savedStates!=null){
@@ -71,7 +78,7 @@ public class summaryFrag extends myFragment {
                 //change the visibility of the layout
                 s_rmd.setVisibility(View.VISIBLE);
 
-                String delay_info = "immediately";
+                String delay_info = " • " + "immediately";
                 String dur_info = "";
                 String see_info = "see";
                 String in_view_info = "";
@@ -84,7 +91,7 @@ public class summaryFrag extends myFragment {
                 //get the info
                 if(savedStates.getString("set_dl")!=null && savedStates.getString("set_dl").equals("1") && savedStates.getString("dur_dl")!=null){
 //                    delay_info = "I will hold off the reminder until "+ sp_dl.getItemAtPosition(Integer.parseInt(savedStates.getString("dur_dl"))) + " later.";
-                    delay_info = "I will hold off the reminder until "+ dur_array[Integer.parseInt(savedStates.getString("dur_dl"))] + " later.";
+                    delay_info = " • "+"hold off the reminder until "+ dur_array[Integer.parseInt(savedStates.getString("dur_dl"))] + " later" + "\n";
 
 
                 }
@@ -99,7 +106,7 @@ public class summaryFrag extends myFragment {
 
                 if(savedStates.getString("set_dur")!=null&&savedStates.getString("set_dur").equals("1")  && savedStates.getString("dur_view")!=null){
                     System.out.println(" dur view" + savedStates.getString("dur_view"));
-                    dur_info="I will fire off the reminder when the selected frames are" + in_view_info +"for more than " + dur_array[Integer.parseInt(savedStates.getString("dur_view"))] + ".";
+                    dur_info=" • "+"when the selected images are" + in_view_info +"for more than " + dur_array[Integer.parseInt(savedStates.getString("dur_view"))];
                 }
                 if(savedStates.getString("sw_show_val")!=null){
                     if (savedStates.getString("sw_show_val").equals("0")){
@@ -112,7 +119,7 @@ public class summaryFrag extends myFragment {
 
                 see_val.setText(see_info);
 
-                conditions.setText(delay_info+"\n"+dur_info + "\n");
+                conditions.setText(delay_info+dur_info);
 
                 System.out.println("conditions: " + conditions.getText());
                 //fill the info
@@ -123,7 +130,7 @@ public class summaryFrag extends myFragment {
                 i_rmd.setVisibility(View.VISIBLE);
 
 
-                String ddl_info = "";
+                String ddl_info = " • "+ "immediately";
                 String repeat_info = "";
                 String see_info = "";
                 String num_interact_info="";
@@ -136,7 +143,7 @@ public class summaryFrag extends myFragment {
                 //get the info
                 if(savedStates.getString("set_ddl").equals("1") && savedStates.getString("fhour")!=null && savedStates.getString("fmins")!=null){
 //                    delay_info = "I will hold off the reminder until "+ sp_dl.getItemAtPosition(Integer.parseInt(savedStates.getString("dur_dl"))) + " later.";
-                    ddl_info = "before "+ savedStates.getString("fhour") + " : " + savedStates.getString("fmins")+"\n";
+                    ddl_info = " • "+"before "+ savedStates.getString("fhour") + " : " + savedStates.getString("fmins")+"\n";
                 }
 
                 if(savedStates.getString("set_rep").equals("1")  && savedStates.getIntArray("weekday_int")!=null){
@@ -159,7 +166,7 @@ public class summaryFrag extends myFragment {
                         repeat_info = "tomorrow";
                     }
 
-
+                    repeat_info = " • " + repeat_info;
                 }
                 if(savedStates.getString("sw_see")!=null){
                     if (savedStates.getString("sw_see").equals("0")){
@@ -194,7 +201,7 @@ public class summaryFrag extends myFragment {
                 TextView conditions = view.findViewById(R.id.conditions_t);
 
                 if(savedStates.getString("Thour")!=null && savedStates.getString("Tmins")!=null){
-                    ddl_info = "at "+ savedStates.getString("Thour") + " : " + savedStates.getString("Tmins") +"\n";
+                    ddl_info = " • "+"at "+ savedStates.getString("Thour") + " : " + savedStates.getString("Tmins") +"\n";
                 }
 
                 if(savedStates.getIntArray("Tweekday_int")!=null){
@@ -216,7 +223,8 @@ public class summaryFrag extends myFragment {
                     }else{
                         repeat_info = "tomorrow";
                     }
-
+                    repeat_info+="\n";
+                    repeat_info = " • " + repeat_info;
                 }
 
                 conditions.setText(ddl_info + repeat_info + "\n" );
@@ -233,9 +241,8 @@ public class summaryFrag extends myFragment {
 
 //        set on clicklisteners
 
-
-
         return view;
     }
+
 
 }

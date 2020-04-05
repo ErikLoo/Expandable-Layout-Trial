@@ -278,6 +278,14 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
         navigateTo(target_frag, R.id.fragCon,true, target_frag, currentData);
     }
 
+    public void navEditMsg(View view){
+        String target_frag= "rMsgFrag";
+        interact_hist = editInteractHist(target_frag);
+        frag_in = R.anim.slide_in_left_r;
+        frag_out = R.anim.slide_out_right_r;
+        navigateTo(target_frag, R.id.fragCon,true, target_frag, currentData);
+    }
+
     private ArrayList<String> editInteractHist(String target_frag){
         ArrayList<String> temp = new ArrayList<>();
         for(int i=0;i<interact_hist.size();i++){

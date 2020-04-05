@@ -94,7 +94,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="250dp"
+            android:layout_marginEnd="280dp"
             android:text="when I"
             android:textAlignment="center"
             android:textColor="@color/pureBlack"
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="the frames"
+            android:text="the images above"
             android:textAlignment="center"
             android:textColor="@color/pureBlack"
             android:textSize="@dimen/inst_text_size"
@@ -124,11 +124,12 @@
             android:checked="false"
             android:gravity="center"
             android:shadowColor="#00696666"
-            android:thumbTint="@color/darkWhite"
-            android:trackTint="@color/track_selector"
             android:showText="true"
+            android:textOff="don't see"
             android:textOn="see"
-            android:textOff = "don't see"
+            android:switchTextAppearance="@style/SwitchTextAppearance"
+            android:thumbTint="@color/transparent"
+            android:trackTint="@color/track_selector"
             app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -140,10 +141,18 @@
             app:layout_constraintTop_toBottomOf="@+id/textView6"
             tools:layout_editor_absoluteX="-46dp">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#c0c0c0" />
             <include
                 layout="@layout/set_delay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#c0c0c0" />
 
             <include
                 android:id="@+id/hold_off_layout"
@@ -152,11 +161,18 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#c0c0c0" />
             <include
                 layout="@layout/set_duration"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" />
+                android:layout_height="wrap_content" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#c0c0c0" />
 
             <include
                 android:id="@+id/in_view_layout"
@@ -174,7 +190,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="-1dp"
+            android:background="@color/darkWhite"
             android:text="CONFIRM"
+            android:textColor="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />

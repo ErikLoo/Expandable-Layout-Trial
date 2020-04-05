@@ -8,7 +8,7 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/lightGrey">
+        android:background="@color/darkWhite">
         <TextView
             android:id="@+id/set_delay"
             android:layout_width="match_parent"
@@ -18,8 +18,7 @@
             android:textAlignment="center"
             android:textColor="@color/pureWhite"
             android:background="?attr/selectableItemBackground"
-            android:textSize="@dimen/inst_text_size"
-            android:textStyle="bold"/>
+            android:textSize="@dimen/inst_text_size" />
 
         <ImageView
             android:id = "@+id/edit_button_t"
@@ -39,11 +38,11 @@
 
     <TextView
         android:id = "@+id/conditions_t"
-        android:layout_width="match_parent"
+        android:layout_width="220sp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="Triggering conditions to be filled"
         android:textColor="@color/pureBlack"
-        android:textAlignment="center"
         android:textSize="@dimen/inst_text_size"/>
 
 

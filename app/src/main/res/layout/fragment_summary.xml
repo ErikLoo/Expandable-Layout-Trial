@@ -34,6 +34,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
+        <ImageView
+            android:id="@+id/edit_button_msg"
+            android:layout_width="24dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:onClick="navEditMsg"
+            app:layout_constraintStart_toEndOf="@+id/rmd_msg"
+            app:layout_constraintTop_toBottomOf="@+id/textView14"
+            app:srcCompat="@android:drawable/ic_menu_edit" />
+
         <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
@@ -50,7 +61,6 @@
             android:layout_width="414dp"
             android:layout_height="617dp"
             android:layout_marginTop="8dp"
-            android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9">
@@ -68,6 +78,7 @@
                     android:layout_height="wrap_content"
                     android:visibility="gone"
                     android:layout_marginTop="8dp" />
+
 
                 <include
                     android:id="@+id/s_rmd"

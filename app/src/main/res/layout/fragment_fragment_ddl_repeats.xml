@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/pureWhite"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment_ddl_repeats">
 
@@ -64,11 +65,11 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <Spinner
-            android:id = "@+id/spinner3"
+            android:id="@+id/spinner3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="7dp"
             android:entries="@array/time_arrays"
             android:prompt="@string/time_prompt"
             app:layout_constraintStart_toEndOf="@+id/sw_see"
@@ -102,7 +103,7 @@
         <Switch
             android:id="@+id/sw_see"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:checked="false"
@@ -111,8 +112,9 @@
             android:showText="true"
             android:textOff="don't see"
             android:textOn="see"
-            android:thumbTint="@color/darkWhite"
+            android:thumbTint="@color/transparent"
             android:trackTint="@color/track_selector"
+            android:switchTextAppearance="@style/SwitchTextAppearance"
             app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -128,7 +130,9 @@
             <include
                 layout="@layout/set_ddl"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"/>
 
             <include
                 layout="@layout/layout_ddl"
@@ -141,7 +145,7 @@
                 layout="@layout/set_repeats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" />
+                android:layout_marginTop="1dp"/>
 
             <include
                 layout="@layout/layout_repeats"
@@ -159,6 +163,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="-1dp"
+            android:background="@color/darkWhite"
+            android:textColor="@color/colorPrimary"
             android:text="CONFIRM"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
