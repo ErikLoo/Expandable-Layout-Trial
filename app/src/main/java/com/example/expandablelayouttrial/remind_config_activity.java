@@ -50,12 +50,13 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
     private questionTimeFrag qTFrag;
     private SetupTimeFragment sTFrag;
     private summaryFrag sumFrag;
+    private myFragment currentFrag;
 
 //    the tag has to match the frag itself
     private String[] fragList= {"rMsgFrag","qIFrag","ddlRFrag","qSFrag","qSSFrag","ssFrag","dDFrag","qTFrag","sTFrag","sumFrag"};
     private ArrayList<String> interact_hist = new ArrayList<String>();
     private String lastFrag;
-    private String currentFrag;
+    private String currentFragName;
     private Bundle currentData;
 
     Switch switch_time_view;
@@ -108,21 +109,22 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
 
         currentData = fragData;
 
-        Fragment fragment;
+        myFragment fragment;
 
         if(interact_hist.size()>0){
             //jump to the last editted page
             fragment = getFragFromName(interact_hist.get(interact_hist.size()-1));
-            currentFrag = interact_hist.get(interact_hist.size()-1);
+            currentFragName = interact_hist.get(interact_hist.size()-1);
         }else{
             remindMsgFrag rMsgFrag = new remindMsgFrag();
             fragment = rMsgFrag;
+            currentFragName = "rMsgFrag";
             interact_hist.add("rMsgFrag");
         }
 
 //        remindMsgFrag rMsgFrag = new remindMsgFrag();
         fragment.setArguments(fragData);
-
+        currentFrag = fragment;
 
         if (savedInstanceState == null) {
 
@@ -137,8 +139,8 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
 
     }
 
-    private Fragment getFragFromName(String fragName){
-        Fragment fragment;
+    private myFragment getFragFromName(String fragName){
+        myFragment fragment;
 
 //        rMsgFrag = new remindMsgFrag();
 //        qIFrag = new questionInteractionFrag();
@@ -198,11 +200,13 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
             interact_hist.remove(interact_hist.size()-1);
         }
 
-        Fragment fragment;
+        myFragment fragment;
 
         fragment = getFragFromName(fragName);
 
-        currentFrag = fragName;
+        currentFragName = fragName;
+
+        currentFrag = fragment;
 
         currentData = data;
 
@@ -230,7 +234,7 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
     public void navigateBack(View view){
         String target_frag="";
         for(int i=0;i<interact_hist.size();i++){
-            if(interact_hist.get(i).equals(currentFrag)&&i!=0){
+            if(interact_hist.get(i).equals(currentFragName)&&i!=0){
                 target_frag = interact_hist.get(i-1);
                 break;
             }
@@ -248,6 +252,42 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
             finish();
 
         }
+    }
+
+    public void navEditI(View view){
+        String target_frag= "qIFrag";
+        interact_hist = editInteractHist(target_frag);
+        frag_in = R.anim.slide_in_left_r;
+        frag_out = R.anim.slide_out_right_r;
+        navigateTo(target_frag, R.id.fragCon,true, target_frag, currentData);
+    }
+
+    public void navEditS(View view){
+        String target_frag= "qSFrag";
+        interact_hist = editInteractHist(target_frag);
+        frag_in = R.anim.slide_in_left_r;
+        frag_out = R.anim.slide_out_right_r;
+        navigateTo(target_frag, R.id.fragCon,true, target_frag, currentData);
+    }
+
+    public void navEditT(View view){
+        String target_frag= "qTFrag";
+        interact_hist = editInteractHist(target_frag);
+        frag_in = R.anim.slide_in_left_r;
+        frag_out = R.anim.slide_out_right_r;
+        navigateTo(target_frag, R.id.fragCon,true, target_frag, currentData);
+    }
+
+    private ArrayList<String> editInteractHist(String target_frag){
+        ArrayList<String> temp = new ArrayList<>();
+        for(int i=0;i<interact_hist.size();i++){
+            temp.add(interact_hist.get(i));
+            if(interact_hist.get(i).equals(target_frag)&&i!=0){
+                break;
+            }
+        }
+
+        return temp;
     }
 
     @Override
@@ -354,7 +394,7 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
 ////        updateAll();
         if (currentData!=null){
             //append history to the data
-//            System.out.println("current data: " + currentData.getString("rMsg"));
+            currentFrag.saveStatus();
             currentData.putStringArrayList("interact_hist",interact_hist);
             data.putExtras(currentData);
             setResult(RESULT_OK,data);

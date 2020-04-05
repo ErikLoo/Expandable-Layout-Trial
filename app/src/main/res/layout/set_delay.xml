@@ -4,14 +4,14 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@color/lightGrey">
+    android:background="@color/darkWhite">
 
     <TextView
         android:id="@+id/set_delay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:text="Set Delay"
+        android:text="Set Reminder Delay"
         android:textAlignment="center"
         android:textColor="@color/pureWhite"
         android:background="?attr/selectableItemBackground"

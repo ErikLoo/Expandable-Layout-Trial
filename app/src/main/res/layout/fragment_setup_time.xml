@@ -55,22 +55,18 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/set_time">
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.webianks.library.scroll_choice.ScrollChoice
             android:id="@+id/scroll_choice_hour"
-            android:layout_width="match_parent"
+            android:layout_width="100sp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:background="@null"
             android:backgroundTint="@null"
             app:scroll_atmospheric="true"
@@ -82,11 +78,19 @@
             app:scroll_selected_item_background="@color/pureWhite"
             app:scroll_selected_item_text_color="@color/colorPrimary" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="4dp"
+            android:text=":"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/inst_text_size" />
+
         <com.webianks.library.scroll_choice.ScrollChoice
             android:id="@+id/scroll_choice_minute"
-            android:layout_width="match_parent"
+            android:layout_width="100sp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             app:scroll_atmospheric="true"
             app:scroll_background_color="#FFF"
             app:scroll_indicator="true"

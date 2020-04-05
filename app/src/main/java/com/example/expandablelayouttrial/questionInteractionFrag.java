@@ -22,7 +22,7 @@ import android.widget.ImageView;
  * Use the {@link questionInteractionFrag#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class questionInteractionFrag extends Fragment {
+public class questionInteractionFrag extends myFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -143,7 +143,4 @@ public class questionInteractionFrag extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void saveStatus(){
-
-    }
 }

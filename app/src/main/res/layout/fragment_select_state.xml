@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
             android:layout_marginEnd="100dp"
-            android:text="Select all the frames that represent the state I need to identify"
+            android:text="Select all the images that best represent the state I need to identify"
             android:textColor="@color/pureBlack"
             android:textSize="20sp"
             android:textAlignment="center"

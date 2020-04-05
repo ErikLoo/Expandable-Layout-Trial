@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 /**
@@ -18,7 +19,7 @@ import android.widget.ImageView;
  * Use the {@link remindMsgFrag#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class remindMsgFrag extends Fragment {
+public class remindMsgFrag extends myFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -113,24 +114,33 @@ public class remindMsgFrag extends Fragment {
 //                saveStatus();
 
 //                System.out.println("sStates: "+ savedStates.getString("rMsg"));
-                saveStatus();
 
-                ((NavigationHost) getActivity()).navigateTo("qIFrag",
-                        R.id.fragCon,true, "qIFrag", savedStates);
+                if(((EditText)v.findViewById(R.id.rmd_name)).getText().toString().length()>5){
+                    saveStatus();
+                    ((NavigationHost) getActivity()).navigateTo("qIFrag",
+                            R.id.fragCon,true, "qIFrag", savedStates);
+                }else{
+                    Toast.makeText(getActivity(),"Message cannot be empty", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
+
+//        Toast.makeText(getActivity(),"Hello Javatpoint", Toast.LENGTH_SHORT).show();
 
         return view;
     }
 
     @Override
-    public void onPause() {
-        saveStatus();
-        super.onPause();
-    }
+//    public void onPause() {
+//        saveStatus();
+//        super.onPause();
+//    }
 
     public void saveStatus(){
+
+        System.out.println(v==null);
+
         String rMsg = ((EditText)v.findViewById(R.id.rmd_name)).getText().toString();
         savedStates.putString("rMsg",rMsg);
         msg_view.setImageResource(R.drawable.pass_p);

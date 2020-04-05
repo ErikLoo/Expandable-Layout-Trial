@@ -15,7 +15,7 @@ import android.widget.ImageView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class questionTimeFrag extends Fragment {
+public class questionTimeFrag extends myFragment {
 
     private Bundle savedStates;
 

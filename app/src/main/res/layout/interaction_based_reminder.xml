@@ -25,6 +25,7 @@
             android:id = "@+id/edit_button_i"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="navEditI"
             app:srcCompat="@android:drawable/ic_menu_edit"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -46,7 +47,7 @@
             android:id = "@+id/see_val_i"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="see"
+            android:text="---"
             android:textColor="@color/pureBlack"
             android:textAlignment="center"
             android:textSize="@dimen/inst_text_size"/>

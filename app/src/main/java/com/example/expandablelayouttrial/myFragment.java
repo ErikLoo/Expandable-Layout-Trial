@@ -29,9 +29,9 @@ public class myFragment extends Fragment {
         return textView;
     }
 
-    public void myOwnMethod()
+    public void saveStatus()
     {
-
+//        to be filled
     }
 
 }

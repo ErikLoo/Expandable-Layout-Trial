@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class fragment_ddl_repeats extends Fragment implements SaveStatus {
+public class fragment_ddl_repeats extends myFragment{
 
 
     List<String> datasHour = new ArrayList<>();
@@ -177,7 +177,10 @@ public class fragment_ddl_repeats extends Fragment implements SaveStatus {
                 savedStates.putString("fhour",hour);
                 savedStates.putString("fmins",mins);
 
-                if(sw_see.isChecked()){sw_see_val="1";}
+                if(sw_see.isChecked()){sw_see_val="1";}else{
+                    sw_see_val="0";
+                }
+
                 savedStates.putString("sw_see",sw_see_val);
                 savedStates.putString("set_ddl",set_ddl);
                 savedStates.putString("set_rep",set_rep);
@@ -388,6 +391,24 @@ public class fragment_ddl_repeats extends Fragment implements SaveStatus {
     }
 
     public void saveStatus(){
+        interact_view.setImageResource(R.drawable.pass_p);
+        savedStates.putInt("interact_view",R.drawable.pass_p);
+//                save all the changes
+        savedStates.putIntArray("weekday_int",weekday);
+        savedStates.putString("weekday",Arrays.toString(weekday));
+        savedStates.putString("fhour",hour);
+        savedStates.putString("fmins",mins);
+
+        if(sw_see.isChecked()){sw_see_val="1";}else{
+            sw_see_val="0";
+        }
+
+        savedStates.putString("sw_see",sw_see_val);
+        savedStates.putString("set_ddl",set_ddl);
+        savedStates.putString("set_rep",set_rep);
+        savedStates.putString("num_interac",Integer.toString(num_interc_view.getSelectedItemPosition()));
+//                System.out.println("weekday: " + weekdata);
+        savedStates.putString("set_interact_rmd","1");
 
     }
 

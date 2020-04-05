@@ -23,6 +23,7 @@
 
         <ImageView
             android:id = "@+id/edit_button_t"
+            android:onClick="navEditT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@android:drawable/ic_menu_edit"/>
@@ -44,5 +45,6 @@
         android:textColor="@color/pureBlack"
         android:textAlignment="center"
         android:textSize="@dimen/inst_text_size"/>
+
 
 </LinearLayout>

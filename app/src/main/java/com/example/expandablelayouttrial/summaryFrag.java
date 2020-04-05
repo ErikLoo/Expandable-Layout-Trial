@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -17,7 +18,7 @@ import org.w3c.dom.Text;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class summaryFrag extends Fragment {
+public class summaryFrag extends myFragment {
 
     private Bundle savedStates;
     private View i_rmd;
@@ -27,6 +28,10 @@ public class summaryFrag extends Fragment {
 
     private Spinner sp_dl;
     private Spinner sp_dur;
+
+    private ImageView edit_but_s;
+    private ImageView edit_but_i;
+    private ImageView edit_but_t;
 
 
     private String[] dur_array= {"30 minutes","0 minute","60 minutes","2 hours","5 hours"};
@@ -49,6 +54,11 @@ public class summaryFrag extends Fragment {
         t_rmd = view.findViewById(R.id.t_rmd);
 
         r_msg = view.findViewById(R.id.rmd_msg);
+
+
+        edit_but_i = view.findViewById(R.id.edit_button_i);
+        edit_but_s = view.findViewById(R.id.edit_button_s);
+        edit_but_i = view.findViewById(R.id.edit_button_t);
 
 
         savedStates = this.getArguments();
@@ -102,7 +112,7 @@ public class summaryFrag extends Fragment {
 
                 see_val.setText(see_info);
 
-                conditions.setText(delay_info+"\n"+dur_info);
+                conditions.setText(delay_info+"\n"+dur_info + "\n");
 
                 System.out.println("conditions: " + conditions.getText());
                 //fill the info
@@ -151,8 +161,8 @@ public class summaryFrag extends Fragment {
 
 
                 }
-                if(savedStates.getString("sw_show_val")!=null){
-                    if (savedStates.getString("sw_show_val").equals("0")){
+                if(savedStates.getString("sw_see")!=null){
+                    if (savedStates.getString("sw_see").equals("0")){
                         see_info = "don't see";
                     }else{
                         see_info = "see";
@@ -209,7 +219,7 @@ public class summaryFrag extends Fragment {
 
                 }
 
-                conditions.setText(ddl_info + repeat_info);
+                conditions.setText(ddl_info + repeat_info + "\n" );
 
             }
 
@@ -220,6 +230,10 @@ public class summaryFrag extends Fragment {
 
         //mark the summary frag as created by access
         savedStates.putInt("sumCreated",1);
+
+//        set on clicklisteners
+
+
 
         return view;
     }

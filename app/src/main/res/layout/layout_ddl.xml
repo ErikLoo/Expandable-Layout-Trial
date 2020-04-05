@@ -1,61 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.webianks.library.scroll_choice.ScrollChoice
-            android:id="@+id/scroll_choice_hour"
-            android:layout_width="100sp"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:backgroundTint="@null"
-            app:scroll_atmospheric="true"
-            app:scroll_background_color="@color/pureWhite"
-            app:scroll_indicator="true"
-            app:scroll_indicator_color="#FFF"
-            app:scroll_item_align="center"
-            app:scroll_item_text_color="@color/lightGrey"
-            app:scroll_selected_item_background="@color/pureWhite"
-            app:scroll_selected_item_text_color="@color/colorPrimary" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <TextView
+            android:id="@+id/textView18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:text="before"
+            android:textColor="@color/pureBlack"
             android:textSize="@dimen/inst_text_size"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginBottom="4dp"
-            android:text=":"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <com.webianks.library.scroll_choice.ScrollChoice
-            android:id="@+id/scroll_choice_minute"
-            android:layout_width="100sp"
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:scroll_atmospheric="true"
-            app:scroll_background_color="#FFF"
-            app:scroll_indicator="true"
-            app:scroll_indicator_color="#FFF"
-            app:scroll_item_align="center"
-            app:scroll_item_text_color="@color/lightGrey"
-            app:scroll_selected_item_background="#FFF"
-            app:scroll_selected_item_text_color="@color/colorPrimary" />
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </LinearLayout>
+            <com.webianks.library.scroll_choice.ScrollChoice
+                android:id="@+id/scroll_choice_hour"
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:backgroundTint="@null"
+                app:scroll_atmospheric="true"
+                app:scroll_background_color="@color/pureWhite"
+                app:scroll_indicator="true"
+                app:scroll_indicator_color="#FFF"
+                app:scroll_item_align="center"
+                app:scroll_item_text_color="@color/lightGrey"
+                app:scroll_selected_item_background="@color/pureWhite"
+                app:scroll_selected_item_text_color="@color/colorPrimary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="4dp"
+                android:text=":"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/inst_text_size" />
+
+            <com.webianks.library.scroll_choice.ScrollChoice
+                android:id="@+id/scroll_choice_minute"
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                app:scroll_atmospheric="true"
+                app:scroll_background_color="#FFF"
+                app:scroll_indicator="true"
+                app:scroll_indicator_color="#FFF"
+                app:scroll_item_align="center"
+                app:scroll_item_text_color="@color/lightGrey"
+                app:scroll_selected_item_background="#FFF"
+                app:scroll_selected_item_text_color="@color/colorPrimary" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
 </LinearLayout>

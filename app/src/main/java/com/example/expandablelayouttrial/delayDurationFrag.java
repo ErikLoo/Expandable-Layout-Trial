@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class delayDurationFrag extends Fragment {
+public class delayDurationFrag extends myFragment {
 
     private Bundle savedStates;
 
@@ -164,8 +164,12 @@ public class delayDurationFrag extends Fragment {
                 savedStates.putString("set_dur",set_dur);
 
                 //for some reason setOnclickListenr sometimes does not work for sw_show and sw_in_view
-                if(sw_show.isChecked()){sw_show_val="1";}
-                if(sw_in_view.isChecked()){sw_in_view_val="1";};
+                if(sw_show.isChecked()){sw_show_val="1";}else{
+                    sw_show_val="0";
+                }
+                if(sw_in_view.isChecked()){sw_in_view_val="1";}else{
+                    sw_in_view_val = "0";
+                }
 
                 savedStates.putString("sw_show_val",sw_show_val);
                 savedStates.putString("sw_in_view_val",sw_in_view_val);
@@ -236,6 +240,31 @@ public class delayDurationFrag extends Fragment {
             sp_dur.setSelection(Integer.parseInt(dur_view));
         }
 
+    }
+
+    public void saveStatus(){
+        state_view.setImageResource(R.drawable.pass_p);
+        savedStates.putInt("state_view",R.drawable.pass_p);
+
+        savedStates.putString("set_dl",set_dl);
+        savedStates.putString("set_dur",set_dur);
+
+        //for some reason setOnclickListenr sometimes does not work for sw_show and sw_in_view
+        if(sw_show.isChecked()){sw_show_val="1";}else{
+            sw_show_val="0";
+        }
+        if(sw_in_view.isChecked()){sw_in_view_val="1";}else{
+            sw_in_view_val = "0";
+        }
+
+        savedStates.putString("sw_show_val",sw_show_val);
+        savedStates.putString("sw_in_view_val",sw_in_view_val);
+        savedStates.putString("dur_dl",Integer.toString(sp_dl.getSelectedItemPosition()));
+        savedStates.putString("dur_view",Integer.toString(sp_dur.getSelectedItemPosition()));
+
+        System.out.println("sw_show_val: " + sw_show_val + "set_dur: " + sw_in_view_val);
+
+        savedStates.putString("set_state_rmd","1");
     }
 
 }

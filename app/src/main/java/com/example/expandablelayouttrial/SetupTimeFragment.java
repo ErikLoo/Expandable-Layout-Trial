@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
-public class SetupTimeFragment extends Fragment {
+public class SetupTimeFragment extends myFragment {
 
 
     List<String> datasHour = new ArrayList<>();
@@ -285,7 +285,17 @@ public class SetupTimeFragment extends Fragment {
         //record the current status of the weekdays
     }
 
+    public void saveStatus(){
+        time_view.setImageResource(R.drawable.pass_p);
+        savedStates.putInt("time_view",R.drawable.pass_p);
 
+        savedStates.putString("set_time_rmd","1");
+
+        savedStates.putIntArray("Tweekday_int",weekday);
+        savedStates.putString("Tweekday",Arrays.toString(weekday));
+        savedStates.putString("Thour",hour);
+        savedStates.putString("Tmins",mins);
+    }
 
 
 }
