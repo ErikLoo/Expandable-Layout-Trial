@@ -39,16 +39,6 @@ public class selectStateFrag extends myFragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_select_state, container, false);
 
-        savedStates = this.getArguments();
-
-        if(savedStates!=null){
-            if(savedStates.getIntegerArrayList("imgStat")!=null){
-                imgStat = savedStates.getIntegerArrayList("imgStat");
-            }
-        }else{
-            savedStates = new Bundle();
-        }
-
         CheckBox off_1 = view.findViewById(R.id.off_1);
         CheckBox off_2 = view.findViewById(R.id.off_2);
         CheckBox off_3 = view.findViewById(R.id.off_3);
@@ -63,6 +53,28 @@ public class selectStateFrag extends myFragment {
         ImageView on_2_check = view.findViewById(R.id.on_2_check);
         ImageView on_3_check = view.findViewById(R.id.on_3_check);
 
+        savedStates = this.getArguments();
+
+
+        if(savedStates!=null){
+            if(savedStates.getIntegerArrayList("imgStat")!=null){ imgStat = savedStates.getIntegerArrayList("imgStat");}
+
+            if (savedStates.getInt("rmd_type",-1)!=-1){
+                if(savedStates.getInt("rmd_type",-1)==1){
+                    off_1.setButtonDrawable(R.drawable.wp_1);
+                    off_2.setButtonDrawable(R.drawable.wp_2);
+                    off_3.setButtonDrawable(R.drawable.wp_3);
+                    on_1.setButtonDrawable(R.drawable.wp_4);
+                    on_2.setButtonDrawable(R.drawable.wp_5);
+                    on_3.setButtonDrawable(R.drawable.wp_6);
+                }
+            }
+
+        }else{
+            savedStates = new Bundle();
+        }
+
+
 //        click on the images to select the ones you want
         setup_check(off_1,off_1_check,imgStat.get(0));
         setup_check(off_2,off_2_check,imgStat.get(1));
@@ -76,7 +88,6 @@ public class selectStateFrag extends myFragment {
 
         navNextFrag(next_but,savedStates);
 
-//        Toast.makeText(getActivity(),"Hello Javatpoint", Toast.LENGTH_SHORT).show();
 
         return view;
     }
@@ -120,8 +131,9 @@ public class selectStateFrag extends myFragment {
 //                data.putIntegerArrayList("status", 'a');
 
                 if(count>0){
+                    Toast.makeText(getActivity(),"Swipe right to go back to image selection", Toast.LENGTH_SHORT).show();
                     ((NavigationHost) getActivity()).navigateTo("dDFrag",
-                            R.id.fragCon,true, "dDFrag", savedStates);
+                            R.id.fragCon_s,true, "dDFrag", savedStates);
                 }else{
                     Toast.makeText(getActivity(),"Need to select at least 1 image", Toast.LENGTH_SHORT).show();
                 }
@@ -174,8 +186,10 @@ public class selectStateFrag extends myFragment {
 //    }
 
     public void saveStatus(){
-        int[] ids = {R.id.off_1,R.id.off_2,R.id.off_3,R.id.on_1,R.id.on_2,R.id.on_3};
-        savedStates.putIntArray("ids",ids);
-        savedStates.putIntegerArrayList("imgStat",getImageStatus(view,ids));
+        if(savedStates!=null){
+            int[] ids = {R.id.off_1,R.id.off_2,R.id.off_3,R.id.on_1,R.id.on_2,R.id.on_3};
+            savedStates.putIntArray("ids",ids);
+            savedStates.putIntegerArrayList("imgStat",getImageStatus(view,ids));
+        }
     }
 }

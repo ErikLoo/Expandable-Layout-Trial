@@ -7,9 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,57 +54,71 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
     private summaryFrag sumFrag;
     private myFragment currentFrag;
 
-//    the tag has to match the frag itself
+    private Switch sw_i;
+    private Switch sw_s;
+    private Switch sw_t;
+    private TextView txt_i;
+    private TextView txt_s;
+    private TextView txt_t;
+
+
+    //    the tag has to match the frag itself
     private String[] fragList= {"rMsgFrag","qIFrag","ddlRFrag","qSFrag","qSSFrag","ssFrag","dDFrag","qTFrag","sTFrag","sumFrag"};
+    private ArrayList<myFragment> essential_frag_list = new ArrayList<myFragment>();
+//    private myFragment[] essential_frag_list = {rMsgFrag,ddlRFrag,ssFrag,dDFrag,sTFrag};
+
     private ArrayList<String> interact_hist = new ArrayList<String>();
     private String lastFrag;
     private String currentFragName;
     private Bundle currentData;
+    private Bundle fragData;
 
-    Switch switch_time_view;
-    Switch switch_location_view;
-    Switch switch_constraint_view;
+    FragmentTransaction transaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remind_config_activity);
-//        time_view = (TextView)findViewById(R.id.label_name_time);
-//        location_view = (TextView) findViewById(R.id.label_name_location);
-//
-//        switch_view = (Switch) findViewById(R.id.switch_time);
-//
-//        switch_time_view = (Switch) findViewById(R.id.switch_time);
-//        switch_location_view = (Switch) findViewById(R.id.switch_location);
-//        switch_constraint_view = (Switch) findViewById(R.id.switch_contraints);
-//
-//        act_name_view = (EditText) findViewById(R.id.act_name);
-//        setUp();
 
-//        initialize all the frags
+        //init toggle buttons
+        sw_i = findViewById(R.id.sw_i);
+        sw_s = findViewById(R.id.sw_s);
+        sw_t = findViewById(R.id.sw_t);
+
+        txt_i = findViewById(R.id.txt_i);
+        txt_s = findViewById(R.id.txt_s);
+        txt_t = findViewById(R.id.txt_t);
 
 
-//        add frag
-//        if (savedInstanceState == null) {
-//            getSupportFragmentManager()
-//                    .beginTransaction()
-//                    .add(R.id.fragCon, new remindMsgFrag())
-//                    .commit();
-//        }
-        //get data from main activity
-        Bundle fragData = getIntent().getExtras();
+        fragData = getIntent().getExtras();
 
         if(fragData!=null){
+//            init here
             ImageView msg_view = findViewById(R.id.msg_view1);
             ImageView interact_view = findViewById(R.id.interact_view);
             ImageView state_view = findViewById(R.id.state_view);
             ImageView time_view = findViewById(R.id.time_view);
+
 
             if(fragData.getInt("msg_view",-1)!=-1){msg_view.setImageResource(fragData.getInt("msg_view"));}
             if(fragData.getInt("interact_view",-1)!=-1){interact_view.setImageResource(fragData.getInt("interact_view"));}
             if(fragData.getInt("state_view",-1)!=-1){state_view.setImageResource(fragData.getInt("state_view"));}
             if(fragData.getInt("time_view",-1)!=-1){time_view.setImageResource(fragData.getInt("time_view"));}
             if(fragData.getStringArrayList("interact_hist")!=null){interact_hist = fragData.getStringArrayList("interact_hist");}
+
+            if(fragData.getBoolean("sw_i",false)!=false){
+                sw_i.setChecked(true);
+                findViewById(R.id.fragCon_i).setVisibility(View.VISIBLE);
+            }
+            if(fragData.getBoolean("sw_s",false)!=false) {
+                sw_s.setChecked(true);
+                findViewById(R.id.fragCon_s).setVisibility(View.VISIBLE);
+            }
+            if(fragData.getBoolean("sw_t",false)!=false){
+                sw_t.setChecked(true);
+                findViewById(R.id.fragCon_t).setVisibility(View.VISIBLE);
+            };
+
         }else{
             fragData = new Bundle();
         }
@@ -116,27 +132,111 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
             fragment = getFragFromName(interact_hist.get(interact_hist.size()-1));
             currentFragName = interact_hist.get(interact_hist.size()-1);
         }else{
-            remindMsgFrag rMsgFrag = new remindMsgFrag();
-            fragment = rMsgFrag;
-            currentFragName = "rMsgFrag";
-            interact_hist.add("rMsgFrag");
+//            remindMsgFrag rMsgFrag = new remindMsgFrag();
+//            fragment = rMsgFrag;
+            currentFragName = "ssFrag";
+            interact_hist.add("ssFrag");
         }
 
+        System.out.println("interaction hist: " + interact_hist +" Current Frag Name: "+ currentFragName);
 //        remindMsgFrag rMsgFrag = new remindMsgFrag();
-        fragment.setArguments(fragData);
-        currentFrag = fragment;
+//        fragment.setArguments(fragData);
+//        currentFrag = fragment;
+
+        rMsgFrag = new remindMsgFrag();
+//        qIFrag = new questionInteractionFrag();
+        ddlRFrag = new fragment_ddl_repeats();
+//        qSFrag =  new questionStateFrag();
+        ssFrag = new selectStateFrag();
+//        qTFrag = new questionTimeFrag();
+        sTFrag = new SetupTimeFragment();
+
+        dDFrag = new delayDurationFrag();
+
+        rMsgFrag.setArguments(fragData);
+        ddlRFrag.setArguments(fragData);
+        ssFrag.setArguments(fragData);
+        sTFrag.setArguments(fragData);
+        dDFrag.setArguments(fragData);
 
         if (savedInstanceState == null) {
+            FragmentManager manager = getSupportFragmentManager();
+            transaction = manager.beginTransaction();
 
 
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.fragCon, fragment)
-                    .commit();
+            //add all the frags
+            transaction.add(R.id.fragCon_m,rMsgFrag);
+            transaction.add(R.id.fragCon_i,ddlRFrag);
+            transaction.add(R.id.fragCon_s,getFragFromName(currentFragName));
+//            transaction.add(R.id.fragCon_s,ssFrag);
+
+            transaction.add(R.id.fragCon_t,sTFrag);
+            transaction.commit();
+
 
         }
 
+        essential_frag_list.add(rMsgFrag);
+        essential_frag_list.add(ddlRFrag);
+        essential_frag_list.add(ssFrag);
+        essential_frag_list.add(sTFrag);
+        essential_frag_list.add(dDFrag);
 
+        init_toggles();
+
+    }
+
+    private void init_toggles(){
+
+
+
+
+        sw_i.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(sw_i.isChecked()){
+                    findViewById(R.id.fragCon_i).setVisibility(View.VISIBLE);
+                    Toast.makeText(remind_config_activity.this, "Interaction-based Reminder On!", Toast.LENGTH_LONG).show();
+                    fragData.putBoolean("sw_i",true);
+                }else {
+                    findViewById(R.id.fragCon_i).setVisibility(View.GONE);
+                    Toast.makeText(remind_config_activity.this, "Interaction-based Reminder Off!", Toast.LENGTH_LONG).show();
+                    fragData.putBoolean("sw_i",false);
+                }
+            }
+        });
+
+        sw_s.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(sw_s.isChecked()){
+                    findViewById(R.id.fragCon_s).setVisibility(View.VISIBLE);
+                    Toast.makeText(remind_config_activity.this, "State-based Reminder On!", Toast.LENGTH_LONG).show();
+                    fragData.putBoolean("sw_s",true);
+                }else {
+                    findViewById(R.id.fragCon_s).setVisibility(View.GONE);
+                    Toast.makeText(remind_config_activity.this, "State-based Reminder Off!", Toast.LENGTH_LONG).show();
+                    fragData.putBoolean("sw_s",false);
+                }
+            }
+        });
+
+        sw_t.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(sw_t.isChecked()){
+                    findViewById(R.id.fragCon_t).setVisibility(View.VISIBLE);
+                    Toast.makeText(remind_config_activity.this, "Time-based Reminder On!", Toast.LENGTH_LONG).show();
+                    fragData.putBoolean("sw_t",true);
+
+                }else {
+                    findViewById(R.id.fragCon_t).setVisibility(View.GONE);
+                    Toast.makeText(remind_config_activity.this, "Time-based Reminder Off!", Toast.LENGTH_LONG).show();
+                    fragData.putBoolean("sw_t",false);
+
+                }
+            }
+        });
     }
 
     private myFragment getFragFromName(String fragName){
@@ -170,10 +270,10 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
             fragment = new questionSpecificStateFrag();
         }
         else if (fragName.equals(fragList[5])){
-            fragment = new selectStateFrag();
+            fragment = ssFrag;
         }
         else if (fragName.equals(fragList[6])){
-            fragment = new delayDurationFrag();
+            fragment = dDFrag;
         }
         else if (fragName.equals(fragList[7])){
             fragment = new questionTimeFrag();
@@ -184,6 +284,8 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
         else{
             fragment = new summaryFrag();
         }
+
+        System.out.println("Navigating to " + fragName);
 
         return fragment;
     }
@@ -231,35 +333,43 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
         System.out.println("interaction history " + interact_hist);
     }
 
-    public void navigateBack(View view){
-        String target_frag="";
-        for(int i=0;i<interact_hist.size();i++){
-            if(interact_hist.get(i).equals(currentFragName)&&i!=0){
-                target_frag = interact_hist.get(i-1);
-                break;
-            }
-        }
-
-//        System.out.println("backword pass" + currentData.getString("rMsg"));
-        if(interact_hist.size()>1){
-
-            frag_in = R.anim.slide_in_left_r;
-            frag_out = R.anim.slide_out_right_r;
-
-            navigateTo(target_frag, R.id.fragCon,true, target_frag, currentData);
-        }else{
-            //pass the data to the original activity
-            finish();
-
-        }
+    @Override
+    public void navigateBackTo(String fragName, int layout, boolean addToBackStack, String tag, Bundle data) {
+        frag_in = R.anim.slide_in_left_r;
+        frag_out = R.anim.slide_out_right_r;
+        navigateTo(fragName,layout,true, tag, currentData);
     }
+//
+//    public void navigateBack(View view){
+//        String target_frag="";
+//        for(int i=0;i<interact_hist.size();i++){
+//            if(interact_hist.get(i).equals(currentFragName)&&i!=0){
+//                target_frag = interact_hist.get(i-1);
+//                break;
+//            }
+//        }
+//
+////        System.out.println("backword pass" + currentData.getString("rMsg"));
+//        if(interact_hist.size()>1){
+//
+//            frag_in = R.anim.slide_in_left_r;
+//            frag_out = R.anim.slide_out_right_r;
+//
+//            navigateTo(target_frag, R.id.fragCon_m,true, target_frag, currentData);
+//        }else{
+//            //pass the data to the original activity
+//            finish();
+//
+//        }
+//    }
+
 
     public void navEditI(View view){
         String target_frag= "qIFrag";
         interact_hist = editInteractHist(target_frag);
         frag_in = R.anim.slide_in_left_r;
         frag_out = R.anim.slide_out_right_r;
-        navigateTo(target_frag, R.id.fragCon,true, target_frag, currentData);
+        navigateTo(target_frag, R.id.fragCon_m,true, target_frag, currentData);
     }
 
     public void navEditS(View view){
@@ -267,7 +377,7 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
         interact_hist = editInteractHist(target_frag);
         frag_in = R.anim.slide_in_left_r;
         frag_out = R.anim.slide_out_right_r;
-        navigateTo(target_frag, R.id.fragCon,true, target_frag, currentData);
+        navigateTo(target_frag, R.id.fragCon_m,true, target_frag, currentData);
     }
 
     public void navEditT(View view){
@@ -275,7 +385,7 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
         interact_hist = editInteractHist(target_frag);
         frag_in = R.anim.slide_in_left_r;
         frag_out = R.anim.slide_out_right_r;
-        navigateTo(target_frag, R.id.fragCon,true, target_frag, currentData);
+        navigateTo(target_frag, R.id.fragCon_m,true, target_frag, currentData);
     }
 
     public void navEditMsg(View view){
@@ -283,7 +393,7 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
         interact_hist = editInteractHist(target_frag);
         frag_in = R.anim.slide_in_left_r;
         frag_out = R.anim.slide_out_right_r;
-        navigateTo(target_frag, R.id.fragCon,true, target_frag, currentData);
+        navigateTo(target_frag, R.id.fragCon_m,true, target_frag, currentData);
     }
 
     private ArrayList<String> editInteractHist(String target_frag){
@@ -353,19 +463,18 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
 //                    });
 //            AlertDialog alertDialog = builder.create();
 //            alertDialog.show();
-//        } else
-//        {
+//        } else {
 ////            item_data.setName(act_name);
 //            finish();
-//        navigateTo(currentFrag, R.id.fragCon,true, currentFrag, currentData);
+//        }
         finish();
     }
 
     @Override
     public void onBackPressed() { //if the "back" key was pressed...
 
-//        ready_to_cancel_activity();
-        finish();
+        ready_to_cancel_activity();
+//        finish();
 
     }
 
@@ -395,6 +504,22 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
 
     }
 
+//    public void finish( ) {
+//        Intent data = new Intent();
+//////        update_data();
+////        item_data.setName(act_name);
+//////        updateAll();
+//        if (currentData!=null){
+//            //append history to the data
+//            //call saveStatus on all the frags
+//            currentFrag.saveStatus();
+//            currentData.putStringArrayList("interact_hist",interact_hist);
+//            data.putExtras(currentData);
+//            setResult(RESULT_OK,data);
+//        }
+//        super.finish();
+//    }
+
     public void finish( ) {
         Intent data = new Intent();
 ////        update_data();
@@ -402,13 +527,26 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
 ////        updateAll();
         if (currentData!=null){
             //append history to the data
-            currentFrag.saveStatus();
+            //call saveStatus on all the frags
+//            if(currentFragName=="dDFrag"){
+//                essential_frag_list.remove(ssFrag);
+//                System.out.println("frag list after removal: " + essential_frag_list);
+//            }
+
+            for(int i=0;i<essential_frag_list.size();i++){
+                //save status for the frags
+//               essential_frag_list[i].saveStatus();
+                System.out.println("current frag: " + currentFragName + " saved frag: " + essential_frag_list.get(i));
+               essential_frag_list.get(i).saveStatus();
+            }
             currentData.putStringArrayList("interact_hist",interact_hist);
             data.putExtras(currentData);
             setResult(RESULT_OK,data);
         }
         super.finish();
     }
+
+
 
     @Override
     protected void onDestroy() {
@@ -417,14 +555,12 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
     }
 
     public void cancel() {
-        Intent data = new Intent();
 //        data.putExtra("return_data",item_data);
 //        data.putExtra("comment",comment);
-        data.putExtras(currentData);
-        setResult(RESULT_CANCELED,data);
+//        currentData = new Bundle();
+//        data.putExtras(currentData);
+        setResult(RESULT_CANCELED,null);
         super.finish();
     }
-
-
 
 }

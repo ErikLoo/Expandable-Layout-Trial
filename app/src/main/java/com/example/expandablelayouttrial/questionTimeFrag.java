@@ -59,7 +59,7 @@ public class questionTimeFrag extends myFragment {
                 savedStates.putInt("time_view",R.drawable.skip_p);
                 savedStates.putString("set_time_rmd","0");
                 ((NavigationHost) getActivity()).navigateTo("sumFrag",
-                        R.id.fragCon,true, "sumFrag", savedStates);
+                        R.id.fragCon_m,true, "sumFrag", savedStates);
             }
         });
 
@@ -68,7 +68,7 @@ public class questionTimeFrag extends myFragment {
             @Override
             public void onClick(View view) {
                 ((NavigationHost) getActivity()).navigateTo("sTFrag",
-                        R.id.fragCon,true, "sTFrag", savedStates);
+                        R.id.fragCon_m,true, "sTFrag", savedStates);
             }
         });
 

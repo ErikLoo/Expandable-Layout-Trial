@@ -141,7 +141,7 @@ public class summaryFrag extends myFragment {
                 Spinner sp_num_interct =view.findViewById(R.id.spinner3);
 
                 //get the info
-                if(savedStates.getString("set_ddl").equals("1") && savedStates.getString("fhour")!=null && savedStates.getString("fmins")!=null){
+                if(savedStates.getString("set_ddl_bar").equals("1") && savedStates.getString("fhour")!=null && savedStates.getString("fmins")!=null){
 //                    delay_info = "I will hold off the reminder until "+ sp_dl.getItemAtPosition(Integer.parseInt(savedStates.getString("dur_dl"))) + " later.";
                     ddl_info = " • "+"before "+ savedStates.getString("fhour") + " : " + savedStates.getString("fmins")+"\n";
                 }

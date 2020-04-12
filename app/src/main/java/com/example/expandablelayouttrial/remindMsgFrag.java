@@ -118,7 +118,7 @@ public class remindMsgFrag extends myFragment {
                 if(((EditText)v.findViewById(R.id.rmd_name)).getText().toString().length()>=5){
                     saveStatus();
                     ((NavigationHost) getActivity()).navigateTo("qIFrag",
-                            R.id.fragCon,true, "qIFrag", savedStates);
+                            R.id.fragCon_m,true, "qIFrag", savedStates);
                 }else{
                     Toast.makeText(getActivity(),"Message cannot be empty", Toast.LENGTH_SHORT).show();
                 }

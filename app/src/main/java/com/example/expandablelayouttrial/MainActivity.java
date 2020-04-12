@@ -80,18 +80,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void intialize_new_entry() {
-        itemView = null;
-        setupAddPaymentButton();
-        open_edit_page();
-    }
+//    private void intialize_new_entry() {
+//        itemView = null;
+//        setupAddPaymentButton();
+//        open_edit_page();
+//    }
 
     private void initialize_demo_entries(){
         itemView = null;
 
 //        initialize two entries for demo purpose
-        setupAddPaymentButton();
-//        setupAddPaymentButton();
+        setupAddPaymentButton(0);
+        setupAddPaymentButton(1);
+//        setupAddPaymentButton(2);
     }
 
     public void edit_configuration(View v)
@@ -103,7 +104,9 @@ public class MainActivity extends AppCompatActivity {
         gAtomPayment = (AtomPayment) v.getTag();
 
         if (gAtomPayment.getFragData()==null){
-            gAtomPayment.setFragData(new Bundle());
+            Bundle newFrag = new Bundle();
+            newFrag.putInt("rmd_type",gAtomPayment.getValue());
+            gAtomPayment.setFragData(newFrag);
         }
 
         open_edit_page();
@@ -167,8 +170,8 @@ public class MainActivity extends AppCompatActivity {
         atomPaysListView.setAdapter(adapter);
     }
 
-    private void setupAddPaymentButton() { // add a list item
-        AtomPayment mAtomPayment = new AtomPayment("",0);
+    private void setupAddPaymentButton(int value) { // add a list item
+        AtomPayment mAtomPayment = new AtomPayment("",value);
      //   adapter.insert(mAtomPayment, 0);// add an entry to the specified index of the array
         adapter.add(mAtomPayment);// add an entry to the end of the array adapter
         gAtomPayment = mAtomPayment; //assign the value to a global variable;
@@ -197,13 +200,19 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                adapter.notifyDataSetChanged();//notify the data set has changed and nay view reflecing the data set should referesh itself
+//                adapter.notifyDataSetChanged();//notify the data set has changed and nay view reflecing the data set should referesh itself
         }
 
         if (resultCode == RESULT_CANCELED) {
             //Log.d("TAG", "RESULT_CANCELED");
 //            removeButton();
+//            fragData = data.getExtras();
+//            clear all the if cancel is selectected
+            gAtomPayment.setName(null);
+            gAtomPayment.setFragData(null);
         }
+
+        adapter.notifyDataSetChanged();
     }
 
 }

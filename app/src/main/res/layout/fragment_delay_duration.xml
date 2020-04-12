@@ -81,38 +81,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="I will provide a reminder to you"
+            android:text="provide a reminder when the images above"
             android:textAlignment="center"
-            android:textColor="@color/pureBlack"
-            android:textSize="@dimen/inst_text_size"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.616"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="280dp"
-            android:text="when I"
-            android:textAlignment="center"
-            android:textColor="@color/pureBlack"
-            android:textSize="@dimen/inst_text_size"
-            app:layout_constraintEnd_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="the images above"
+            android:text="are"
             android:textAlignment="center"
-            android:textColor="@color/pureBlack"
-            android:textSize="@dimen/inst_text_size"
-            app:layout_constraintStart_toEndOf="@+id/sw_show2"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/textView4"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <Switch
@@ -125,30 +110,33 @@
             android:gravity="center"
             android:shadowColor="#00696666"
             android:showText="true"
-            android:textOff="don't see"
-            android:textOn="see"
             android:switchTextAppearance="@style/SwitchTextAppearance"
+            android:textOff="not seen"
+            android:textOn="seen"
             android:thumbTint="@color/transparent"
             android:trackTint="@color/track_selector"
-            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintStart_toEndOf="@+id/textView6"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linearLayoutCompat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/textView6"
-            tools:layout_editor_absoluteX="-46dp">
+            tools:layout_editor_absoluteX="0dp">
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#c0c0c0" />
+
             <include
-                layout="@layout/set_delay"
+                layout="@layout/set_delay_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -165,10 +153,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#c0c0c0" />
+
             <include
-                layout="@layout/set_duration"
+                layout="@layout/set_duration_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -192,6 +182,7 @@
             android:layout_marginEnd="-1dp"
             android:background="@color/darkWhite"
             android:text="CONFIRM"
+            android:visibility="gone"
             android:textColor="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

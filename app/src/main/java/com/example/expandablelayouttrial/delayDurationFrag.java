@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -61,6 +62,9 @@ public class delayDurationFrag extends myFragment {
         Spinner spinner = view.findViewById(R.id.spinner1);
 //        get data from the previous fragment
         int [] ids = {R.id.off_1_s,R.id.off_2_s,R.id.off_3_s,R.id.on_1_s,R.id.on_2_s,R.id.on_3_s};
+
+        int [] wp_drawable = {R.drawable.wp_1,R.drawable.wp_2,R.drawable.wp_3,R.drawable.wp_4,R.drawable.wp_5,R.drawable.wp_6};
+
         ArrayList<Integer> imgStat = null;
 
         //from the data we get from the preiovous frag, change the visibility of images
@@ -93,6 +97,16 @@ public class delayDurationFrag extends myFragment {
             if (savedStates.getString("dur_dl")!=null){dur_dl = savedStates.getString("dur_dl");}
             if (savedStates.getString("dur_view")!=null){ dur_view = savedStates.getString("dur_view");}
             if (savedStates.getIntegerArrayList("imgStat")!=null){ imgStat = savedStates.getIntegerArrayList("imgStat");}
+
+            //use a different set of images if it's for the watering plant case
+            if (savedStates.getInt("rmd_type",-1)!=-1){
+                if(savedStates.getInt("rmd_type",-1)==1){
+                    for(int i=0;i<ids.length;i++){
+                        ImageView img = view.findViewById(ids[i]);
+                        img.setImageResource(wp_drawable[i]);
+                    }
+                }
+            }
 
 
         }else{
@@ -191,10 +205,27 @@ public class delayDurationFrag extends myFragment {
                 savedStates.putString("set_state_rmd","1");
 
                 ((NavigationHost) getActivity()).navigateTo("qTFrag",
-                        R.id.fragCon,true, "qTFrag", savedStates);
+                        R.id.fragCon_m,true, "qTFrag", savedStates);
             }
         });
 
+
+        view.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
+            @Override
+            public void onSwipeRight() {
+                Toast.makeText(getActivity(), "Previous Page", Toast.LENGTH_SHORT).show();
+                ((NavigationHost) getActivity()).navigateBackTo("ssFrag",
+                        R.id.fragCon_s,true, "ssFrag", savedStates);
+            }
+
+            public void onSwipeLeft() {
+                Toast.makeText(getActivity(), "End of Fragment", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+//        if(getActivity().findViewById(R.id.fragCon_s).getVisibility()==View.VISIBLE){
+////            Toast.makeText(getActivity(),"Swipe right to go back to image selection", Toast.LENGTH_SHORT).show();
+//        }
 
         return view;
     }
@@ -254,28 +285,30 @@ public class delayDurationFrag extends myFragment {
 
 
     public void saveStatus(){
-        state_view.setImageResource(R.drawable.pass_p);
-        savedStates.putInt("state_view",R.drawable.pass_p);
+        if(state_view!=null && savedStates!=null){
+            state_view.setImageResource(R.drawable.pass_p);
+            savedStates.putInt("state_view",R.drawable.pass_p);
 
-        savedStates.putString("set_dl",set_dl);
-        savedStates.putString("set_dur",set_dur);
+            savedStates.putString("set_dl",set_dl);
+            savedStates.putString("set_dur",set_dur);
 
-        //for some reason setOnclickListenr sometimes does not work for sw_show and sw_in_view
-        if(sw_show.isChecked()){sw_show_val="1";}else{
-            sw_show_val="0";
+            //for some reason setOnclickListenr sometimes does not work for sw_show and sw_in_view
+            if(sw_show.isChecked()){sw_show_val="1";}else{
+                sw_show_val="0";
+            }
+            if(sw_in_view.isChecked()){sw_in_view_val="1";}else{
+                sw_in_view_val = "0";
+            }
+
+            savedStates.putString("sw_show_val",sw_show_val);
+            savedStates.putString("sw_in_view_val",sw_in_view_val);
+            savedStates.putString("dur_dl",Integer.toString(sp_dl.getSelectedItemPosition()));
+            savedStates.putString("dur_view",Integer.toString(sp_dur.getSelectedItemPosition()));
+
+            System.out.println("sw_show_val: " + sw_show_val + "set_dur: " + sw_in_view_val);
+
+            savedStates.putString("set_state_rmd","1");
         }
-        if(sw_in_view.isChecked()){sw_in_view_val="1";}else{
-            sw_in_view_val = "0";
-        }
-
-        savedStates.putString("sw_show_val",sw_show_val);
-        savedStates.putString("sw_in_view_val",sw_in_view_val);
-        savedStates.putString("dur_dl",Integer.toString(sp_dl.getSelectedItemPosition()));
-        savedStates.putString("dur_view",Integer.toString(sp_dur.getSelectedItemPosition()));
-
-        System.out.println("sw_show_val: " + sw_show_val + "set_dur: " + sw_in_view_val);
-
-        savedStates.putString("set_state_rmd","1");
     }
 
 }

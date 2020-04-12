@@ -9,7 +9,7 @@ public class AtomPayment implements Serializable {
 	
 	private String name;
 	private String id = "not assigned";
-	private double value = 0;
+	private int value = 0;
 	private boolean extension = false;
 	private String hour;
 	private String minute;
@@ -20,7 +20,7 @@ public class AtomPayment implements Serializable {
 	private boolean checked;
 	private Bundle fragData;
 
-	public AtomPayment(String name, double value) {
+	public AtomPayment(String name, int value) {
 		this.setName(name);
 		this.setValue(value);
 	}
@@ -38,11 +38,11 @@ public class AtomPayment implements Serializable {
 	}
 	public void setID(String id) {this.id = id;}
 
-	public double getValue() {
+	public int getValue() {
 		return value;
 	}
 
-	public void setValue(double value) {
+	public void setValue(int value) {
 		this.value = value;
 	}
 

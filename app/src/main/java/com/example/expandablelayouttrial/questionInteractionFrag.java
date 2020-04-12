@@ -100,7 +100,7 @@ public class questionInteractionFrag extends myFragment {
                 savedStates.putInt("interact_view",R.drawable.skip_p);
                 savedStates.putString("set_interact_rmd","0");
                 ((NavigationHost) getActivity()).navigateTo("qSFrag",
-                        R.id.fragCon,true, "qSFrag", savedStates);
+                        R.id.fragCon_m,true, "qSFrag", savedStates);
             }
         });
 
@@ -108,7 +108,7 @@ public class questionInteractionFrag extends myFragment {
             @Override
             public void onClick(View view) {
                 ((NavigationHost) getActivity()).navigateTo("ddlRFrag",
-                        R.id.fragCon,true, "ddlRFrag", savedStates);
+                        R.id.fragCon_m,true, "ddlRFrag", savedStates);
             }
         });
 

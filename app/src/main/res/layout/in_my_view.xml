@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="I will provide a reminder to you"
-        android:textColor="@color/pureBlack"
-        android:textSize="@dimen/inst_text_size"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,8 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="when the selected images are"
-        android:textColor="@color/pureBlack"
-        android:textSize="@dimen/inst_text_size"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="@+id/textView10"
         app:layout_constraintStart_toStartOf="@+id/textView10"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -54,8 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="for more than"
-        android:textColor="@color/pureBlack"
-        android:textSize="@dimen/inst_text_size"
+        android:textSize="18dp"
         app:layout_constraintStart_toStartOf="@+id/textView11"
         app:layout_constraintTop_toBottomOf="@+id/sw_in_view" />
 

@@ -12,6 +12,7 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,6 +72,7 @@ public class fragment_ddl_repeats extends myFragment{
 
     private View v;
     private ImageView interact_view;
+    private ImageView show_img;
 
     public fragment_ddl_repeats() {
         // Required empty public constructor
@@ -85,6 +87,7 @@ public class fragment_ddl_repeats extends myFragment{
         v = view;
 
         Button confirm_but = view.findViewById(R.id.next_step);
+        show_img = view.findViewById(R.id.show_img);
 
 //        private String[] fragList= {"rMsgFrag","qIFrag","ddlRFrag","qSFrag","qSSFrag","ssFrag","dDFrag","qTFrag","sTFrag","sumFrag"};
         interact_view = getActivity().findViewById(R.id.interact_view);
@@ -153,13 +156,21 @@ public class fragment_ddl_repeats extends myFragment{
         if(savedStates!=null){
 //            load data from hisotry
             if (savedStates.getString("weekday")!=null){weekdata = savedStates.getString("weekday");}
-            if (savedStates.getString("set_ddl")!=null){set_ddl = savedStates.getString("set_ddl");}
+            if (savedStates.getString("set_ddl_bar")!=null){set_ddl = savedStates.getString("set_ddl_bar");}
             if (savedStates.getString("set_rep")!=null){set_rep=savedStates.getString("set_rep");}
             if (savedStates.getString("sw_see")!=null){sw_see_val = savedStates.getString("sw_see");}
             if (savedStates.getString("num_interac")!=null){num_interact = savedStates.getString("num_interac");}
             if (savedStates.getString("fhour")!=null){ hour = savedStates.getString("fhour");}
             if (savedStates.getString("fmins")!=null){ mins = savedStates.getString("fmins");}
-
+            if (savedStates.getInt("rmd_type",-1)!=-1){
+                if(savedStates.getInt("rmd_type",-1)==0){
+                    show_img.setImageResource(R.drawable.stove_pic_hand);
+                }else if(savedStates.getInt("rmd_type",-1)==1){
+                    show_img.setImageResource(R.drawable.wp_i_1);
+                }else{
+                    //set image source 3
+                }
+            }
 
         }else{
             //create a new data bundle if there is none
@@ -186,13 +197,13 @@ public class fragment_ddl_repeats extends myFragment{
                 }
 
                 savedStates.putString("sw_see",sw_see_val);
-                savedStates.putString("set_ddl",set_ddl);
+                savedStates.putString("set_ddl_bar",set_ddl);
                 savedStates.putString("set_rep",set_rep);
                 savedStates.putString("num_interac",Integer.toString(num_interc_view.getSelectedItemPosition()));
 //                System.out.println("weekday: " + weekdata);
                 savedStates.putString("set_interact_rmd","1");
                 ((NavigationHost) getActivity()).navigateTo("qSFrag",
-                        R.id.fragCon,true, "qSFrag", savedStates);
+                        R.id.fragCon_m,true, "qSFrag", savedStates);
             }
         });
 
@@ -408,7 +419,7 @@ public class fragment_ddl_repeats extends myFragment{
         }
 
         savedStates.putString("sw_see",sw_see_val);
-        savedStates.putString("set_ddl",set_ddl);
+        savedStates.putString("set_ddl_bar",set_ddl);
         savedStates.putString("set_rep",set_rep);
         savedStates.putString("num_interac",Integer.toString(num_interc_view.getSelectedItemPosition()));
 //                System.out.println("weekday: " + weekdata);

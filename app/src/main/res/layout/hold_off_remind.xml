@@ -12,8 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="I will hold off the reminder until"
-        android:textColor="@color/pureBlack"
-        android:textSize="@dimen/inst_text_size"
+        android:textSize="18dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,8 +23,7 @@
         android:layout_marginStart="2dp"
         android:layout_marginTop="8dp"
         android:text="later"
-        android:textColor="@color/pureBlack"
-        android:textSize="@dimen/inst_text_size"
+        android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/spinner1"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -35,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
+        android:switchTextAppearance="@style/SwitchTextAppearance"
         android:entries="@array/hour_arrays"
         android:prompt="@string/hour_prompt"
         app:layout_constraintStart_toStartOf="@+id/textView7"

@@ -17,148 +17,75 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="100dp"
             android:layout_marginEnd="100dp"
-            android:text="Select all the images that best represent the state I need to identify"
-            android:textColor="@color/pureBlack"
-            android:textSize="@dimen/inst_text_size"
-            android:textAlignment="center"
+            android:text="Select all the images that best represent the state that needs to be identified"
+            android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <CheckBox
-            android:id="@+id/off_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:button="@drawable/off_1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-        <ImageView
-            android:id="@+id/off_1_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/select_icon"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/off_1"
-            app:layout_constraintEnd_toEndOf="@+id/off_1" />
-
-
-        <CheckBox
-            android:id="@+id/off_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:button="@drawable/off_2"
-            app:layout_constraintEnd_toStartOf="@+id/off_3"
-            app:layout_constraintStart_toEndOf="@+id/off_1"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-        <ImageView
-            android:id="@+id/off_2_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/select_icon"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/off_2"
-            app:layout_constraintEnd_toEndOf="@+id/off_2" />
-
-
-        <CheckBox
-            android:id="@+id/off_3"
+        <HorizontalScrollView
+            android:id="@+id/horizontalScrollView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:button="@drawable/off_3"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-        <ImageView
-            android:id="@+id/off_3_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/select_icon"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/off_3"
-            app:layout_constraintEnd_toEndOf="@+id/off_3" />
-
-
-        <CheckBox
-            android:id="@+id/on_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:button="@drawable/on_1"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/off_1" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-        <ImageView
-            android:id="@+id/on_1_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/select_icon"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/on_1"
-            app:layout_constraintEnd_toEndOf="@+id/on_1" />
+            <LinearLayout
+                android:id="@+id/linearLayoutVideos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:orientation="horizontal">
 
+                <include
+                    layout="@layout/off_1"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:id="@+id/on_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:button="@drawable/on_2"
-            app:layout_constraintEnd_toStartOf="@+id/on_3"
-            app:layout_constraintStart_toEndOf="@+id/on_1"
-            app:layout_constraintTop_toBottomOf="@+id/off_3" />
+                <include
+                    layout="@layout/off_2"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/on_2_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/select_icon"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/on_2"
-            app:layout_constraintEnd_toEndOf="@+id/on_2" />
+                <include
+                    layout="@layout/off_3"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
+                <include
+                    layout="@layout/on_1"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-        <CheckBox
-            android:id="@+id/on_3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:button="@drawable/on_3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/off_2" />
+                <include
+                    layout="@layout/on_2"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/on_3_check"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/select_icon"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="@+id/on_3"
-            app:layout_constraintEnd_toEndOf="@+id/on_3" />
+                <include
+                    layout="@layout/on_3"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
 
 
         <Button
@@ -167,11 +94,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/mybutton"
+            android:minHeight="30dp"
+            android:radius="100dp"
             android:text="NEXT"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/on_2" />
+            app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView2" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

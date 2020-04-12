@@ -52,7 +52,7 @@ public class questionStateFrag extends myFragment {
             @Override
             public void onClick(View view) {
                 ((NavigationHost) getActivity()).navigateTo("qSSFrag",
-                        R.id.fragCon,true, "qSSFrag", savedStates);
+                        R.id.fragCon_m,true, "qSSFrag", savedStates);
             }
         });
 
@@ -65,7 +65,7 @@ public class questionStateFrag extends myFragment {
 
                 savedStates.putString("set_state_rmd","0");
                 ((NavigationHost) getActivity()).navigateTo("qTFrag",
-                        R.id.fragCon,true, "qTFrag", savedStates);
+                        R.id.fragCon_m,true, "qTFrag", savedStates);
             }
         });
 

@@ -108,7 +108,7 @@ public class SetupTimeFragment extends myFragment {
                 savedStates.putString("Tmins",mins);
 
                 ((NavigationHost) getActivity()).navigateTo("sumFrag",
-                        R.id.fragCon,true, "sumFrag", savedStates);
+                        R.id.fragCon_m,true, "sumFrag", savedStates);
             }
         });
         //prepopulate();

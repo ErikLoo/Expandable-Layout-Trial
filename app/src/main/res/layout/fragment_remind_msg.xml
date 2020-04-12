@@ -17,10 +17,10 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:text="Type in your reminder message"
             android:textColor="@android:color/black"
-            android:textSize="18sp" />
+            android:textSize="@dimen/inst_text_size" />
 
         <EditText
             android:id="@+id/rmd_name"
@@ -30,7 +30,7 @@
             android:hint="For example, turn off the stove"
 
             android:textColor="@color/colorPrimary"
-            android:textSize="14sp" />
+            android:textSize="18dp" />
 
         <View
             android:layout_width="match_parent"
@@ -45,6 +45,7 @@
             android:text="CONFIRM"
             android:textColor="@color/colorPrimary"
             android:layout_marginTop="20dp"
+            android:visibility="gone"
             android:layout_gravity="center" />
 
 
