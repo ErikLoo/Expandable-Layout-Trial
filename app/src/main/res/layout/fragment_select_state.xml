@@ -15,11 +15,9 @@
             android:id="@+id/textView3"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginEnd="100dp"
-            android:text="Select all the images that best represent the state that needs to be identified"
+            android:text="Select all the images that best represent the states when a reminder is needed."
             android:textSize="18dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:lineSpacingMultiplier="1.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +25,7 @@
             android:id="@+id/horizontalScrollView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -43,45 +41,45 @@
 
                 <include
                     layout="@layout/off_1"
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginRight="20sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp" />
 
                 <include
                     layout="@layout/off_2"
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginRight="20sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp" />
 
                 <include
                     layout="@layout/off_3"
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginRight="20sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp" />
 
                 <include
                     layout="@layout/on_1"
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginRight="20sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp" />
 
                 <include
                     layout="@layout/on_2"
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginRight="20sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp" />
 
                 <include
                     layout="@layout/on_3"
-                    android:layout_marginLeft="20sp"
-                    android:layout_marginRight="20sp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20sp"
+                    android:layout_marginRight="20sp" />
 
             </LinearLayout>
 
@@ -100,6 +98,7 @@
             android:radius="100dp"
             android:text="NEXT"
             android:textColor="@color/colorPrimary"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

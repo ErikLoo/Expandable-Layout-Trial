@@ -31,4 +31,11 @@
         <item>5</item>
     </string-array>
 
+    <string name="freq">#</string>
+
+    <string-array name="freq_arrays">
+        <item>day</item>
+        <item>week</item>
+        <item>month</item>
+    </string-array>
 </resources>

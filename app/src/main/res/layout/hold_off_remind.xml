@@ -11,10 +11,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="I will hold off the reminder until"
+        android:text="The reminder will be held off until"
         android:textSize="18dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -22,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:layout_marginTop="8dp"
-        android:text="later"
+        android:text="later."
         android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/spinner1"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -31,11 +30,10 @@
         android:id="@+id/spinner1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
-        android:switchTextAppearance="@style/SwitchTextAppearance"
         android:entries="@array/hour_arrays"
         android:prompt="@string/hour_prompt"
+        android:switchTextAppearance="@style/SwitchTextAppearance"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 

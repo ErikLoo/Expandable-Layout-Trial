@@ -113,6 +113,7 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
             if(fragData.getBoolean("sw_s",false)!=false) {
                 sw_s.setChecked(true);
                 findViewById(R.id.fragCon_s).setVisibility(View.VISIBLE);
+                findViewById(R.id.fragCon_s_2).setVisibility(View.VISIBLE);
             }
             if(fragData.getBoolean("sw_t",false)!=false){
                 sw_t.setChecked(true);
@@ -167,14 +168,15 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
             //add all the frags
             transaction.add(R.id.fragCon_m,rMsgFrag);
             transaction.add(R.id.fragCon_i,ddlRFrag);
-            transaction.add(R.id.fragCon_s,getFragFromName(currentFragName));
+            transaction.add(R.id.fragCon_s,ssFrag);
+            transaction.add(R.id.fragCon_s_2,dDFrag);
 //            transaction.add(R.id.fragCon_s,ssFrag);
 
             transaction.add(R.id.fragCon_t,sTFrag);
             transaction.commit();
 
-
         }
+
 
         essential_frag_list.add(rMsgFrag);
         essential_frag_list.add(ddlRFrag);
@@ -198,6 +200,8 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
                     findViewById(R.id.fragCon_i).setVisibility(View.VISIBLE);
                     Toast.makeText(remind_config_activity.this, "Interaction-based Reminder On!", Toast.LENGTH_LONG).show();
                     fragData.putBoolean("sw_i",true);
+//                    start the video as soon as the ddlFrag becomes visible
+                    ddlRFrag.startVid();
                 }else {
                     findViewById(R.id.fragCon_i).setVisibility(View.GONE);
                     Toast.makeText(remind_config_activity.this, "Interaction-based Reminder Off!", Toast.LENGTH_LONG).show();
@@ -211,10 +215,12 @@ public class remind_config_activity extends AppCompatActivity implements Navigat
             public void onClick(View view) {
                 if(sw_s.isChecked()){
                     findViewById(R.id.fragCon_s).setVisibility(View.VISIBLE);
+                    findViewById(R.id.fragCon_s_2).setVisibility(View.VISIBLE);
                     Toast.makeText(remind_config_activity.this, "State-based Reminder On!", Toast.LENGTH_LONG).show();
                     fragData.putBoolean("sw_s",true);
                 }else {
                     findViewById(R.id.fragCon_s).setVisibility(View.GONE);
+                    findViewById(R.id.fragCon_s_2).setVisibility(View.GONE);
                     Toast.makeText(remind_config_activity.this, "State-based Reminder Off!", Toast.LENGTH_LONG).show();
                     fragData.putBoolean("sw_s",false);
                 }

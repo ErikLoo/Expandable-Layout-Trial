@@ -180,6 +180,10 @@ public class SetupTimeFragment extends myFragment {
             }
         });
 
+
+        scrollChoiceHour.setItemTextSize(40);
+        scrollChoiceMins.setItemTextSize(40);
+
     }
 
     private void loadDatas(){

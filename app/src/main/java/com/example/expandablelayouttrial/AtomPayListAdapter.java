@@ -59,10 +59,10 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 		if (position==0){
 			//change the image here
 //			holder.changeImg.setImageResource(R.drawable.circle);
-			holder.changeImg.setImageResource(R.drawable.stove_pic);
+			holder.changeImg.setImageResource(R.drawable.stove_title);
 		}
 		else{
-			holder.changeImg.setImageResource(R.drawable.plant_pic);
+			holder.changeImg.setImageResource(R.drawable.wp_i_title);
 		}
 
 		holder.removePaymentButton = (ImageButton)row.findViewById(R.id.atomPay_removePay);
@@ -234,8 +234,8 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 	}
 
 	private void initial_pos(final AtomPaymentHolder holder){
-		holder.name.setTranslationX(100);// move right
-		holder.changeImg.setTranslationX(100);
+		holder.name.setTranslationX(0);// move right
+		holder.changeImg.setTranslationX(0);
 		holder.switchButton.setVisibility(View.GONE);
 		holder.editButton.setVisibility(View.GONE);
 //		holder.reviewButton.setVisibility(View.GONE);
@@ -244,16 +244,16 @@ public class AtomPayListAdapter extends ArrayAdapter<AtomPayment> {
 
 
 	private void extend_view(final AtomPaymentHolder holder) {
-		holder.name.animate(). translationX(-100);// move right
-		holder.changeImg.animate().translationX(-100);
+		holder.name.animate(). translationX(-200);// move right
+		holder.changeImg.animate().translationX(-200);
 		holder.switchButton.setVisibility(View.VISIBLE);
 		holder.editButton.setVisibility(View.VISIBLE);
 		holder.removePaymentButton.setVisibility(View.VISIBLE);
 	}
 
 	private void retract_view(final AtomPaymentHolder holder) {
-		holder.name.animate(). translationX(100);// move right
-		holder.changeImg.animate(). translationX(100);// move right
+		holder.name.animate(). translationX(0);// move right
+		holder.changeImg.animate(). translationX(0);// move right
 
 		holder.switchButton.setVisibility(View.GONE);
 		holder.editButton.setVisibility(View.GONE);

@@ -1,6 +1,7 @@
 package com.example.expandablelayouttrial;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -55,6 +58,7 @@ public class fragment_ddl_repeats extends myFragment{
     private View scroll_clock;
     private View week_days;
     private Spinner num_interc_view;
+    private Spinner freq_spin;
 
     Calendar currentTime;
 
@@ -65,14 +69,16 @@ public class fragment_ddl_repeats extends myFragment{
     private String weekdata;
     private String set_ddl="0";
     private String set_rep="0";
-    private String sw_see_val="1";
+    private String sw_see_val="0";
     private String num_interact="0";
+    private String freq;
 
     private Bundle savedStates;
 
     private View v;
     private ImageView interact_view;
     private ImageView show_img;
+    private VideoView vid_view;
 
     public fragment_ddl_repeats() {
         // Required empty public constructor
@@ -87,10 +93,15 @@ public class fragment_ddl_repeats extends myFragment{
         v = view;
 
         Button confirm_but = view.findViewById(R.id.next_step);
-        show_img = view.findViewById(R.id.show_img);
+//        show_img = view.findViewById(R.id.show_img);
 
-//        private String[] fragList= {"rMsgFrag","qIFrag","ddlRFrag","qSFrag","qSSFrag","ssFrag","dDFrag","qTFrag","sTFrag","sumFrag"};
+//        set up video view
+        vid_view = view.findViewById(R.id.vid);
+
+
+        //        private String[] fragList= {"rMsgFrag","qIFrag","ddlRFrag","qSFrag","qSSFrag","ssFrag","dDFrag","qTFrag","sTFrag","sumFrag"};
         interact_view = getActivity().findViewById(R.id.interact_view);
+
         sw_ddl = view.findViewById(R.id.sw_ddl);
         sw_r = view.findViewById(R.id.sw_r);
 
@@ -99,9 +110,13 @@ public class fragment_ddl_repeats extends myFragment{
         sw_see  = view.findViewById(R.id.sw_see);
 
         num_interc_view = view.findViewById(R.id.spinner3);
+        freq_spin = view.findViewById(R.id.spinner_freq);
 
         ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.time_arrays, R.layout.spinner_item);
         num_interc_view.setAdapter(adapter);
+
+        ArrayAdapter adapter2 = ArrayAdapter.createFromResource(getActivity(), R.array.freq_arrays, R.layout.spinner_item_hour);
+        freq_spin.setAdapter(adapter2);
 
         sw_see.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -122,11 +137,13 @@ public class fragment_ddl_repeats extends myFragment{
 
                 if (scroll_clock.getVisibility()==View.VISIBLE) {
                     scroll_clock.setVisibility(View.GONE);
-
                     set_ddl = "0";
+                    Toast.makeText(getActivity(), "Set Fire-off deadline: Off!", Toast.LENGTH_SHORT).show();
+
                 }else{
                     scroll_clock.setVisibility(View.VISIBLE);
                     set_ddl = "1";
+                    Toast.makeText(getActivity(), "Set Fire-off deadline: On!", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -137,12 +154,12 @@ public class fragment_ddl_repeats extends myFragment{
             public void onClick(View view) {
                 if (week_days.getVisibility()==View.VISIBLE){
                     week_days.setVisibility(View.GONE);
-
+                    Toast.makeText(getActivity(), "Set Reminder Repeats: Off!", Toast.LENGTH_SHORT).show();
                     set_rep = "0";
                 }
                 else{
                     week_days.setVisibility(View.VISIBLE);
-
+                    Toast.makeText(getActivity(), "Set Reminder Repeats: On!", Toast.LENGTH_SHORT).show();
                     set_rep = "1";
                 }
             }
@@ -153,6 +170,8 @@ public class fragment_ddl_repeats extends myFragment{
 
         savedStates = this.getArguments();
 
+        String vid_path = "android.resource://" + getActivity().getPackageName()+ "/" + R.raw.stove_hand;
+
         if(savedStates!=null){
 //            load data from hisotry
             if (savedStates.getString("weekday")!=null){weekdata = savedStates.getString("weekday");}
@@ -160,13 +179,16 @@ public class fragment_ddl_repeats extends myFragment{
             if (savedStates.getString("set_rep")!=null){set_rep=savedStates.getString("set_rep");}
             if (savedStates.getString("sw_see")!=null){sw_see_val = savedStates.getString("sw_see");}
             if (savedStates.getString("num_interac")!=null){num_interact = savedStates.getString("num_interac");}
+            if (savedStates.getString("freq_spin")!=null){freq = savedStates.getString("freq_spin");}
             if (savedStates.getString("fhour")!=null){ hour = savedStates.getString("fhour");}
             if (savedStates.getString("fmins")!=null){ mins = savedStates.getString("fmins");}
             if (savedStates.getInt("rmd_type",-1)!=-1){
                 if(savedStates.getInt("rmd_type",-1)==0){
-                    show_img.setImageResource(R.drawable.stove_pic_hand);
+//                    show_img.setImageResource(R.drawable.stove_pic_hand);
+                    vid_path = "android.resource://" + getActivity().getPackageName()+ "/" + R.raw.stove_hand;
                 }else if(savedStates.getInt("rmd_type",-1)==1){
-                    show_img.setImageResource(R.drawable.wp_i_1);
+//                    show_img.setImageResource(R.drawable.wp_i_1);
+                    vid_path = "android.resource://" + getActivity().getPackageName()+ "/" + R.raw.wp_hand;
                 }else{
                     //set image source 3
                 }
@@ -176,6 +198,13 @@ public class fragment_ddl_repeats extends myFragment{
             //create a new data bundle if there is none
             savedStates = new Bundle();
         }
+
+        Uri uri = Uri.parse(vid_path);
+        vid_view.setVideoURI(uri);
+        MediaController mediaController = new MediaController(getActivity());
+        vid_view.setMediaController(mediaController);
+        mediaController.setAnchorView(vid_view);
+
 
         initData();
 
@@ -200,12 +229,16 @@ public class fragment_ddl_repeats extends myFragment{
                 savedStates.putString("set_ddl_bar",set_ddl);
                 savedStates.putString("set_rep",set_rep);
                 savedStates.putString("num_interac",Integer.toString(num_interc_view.getSelectedItemPosition()));
+                savedStates.putString("freq_spin",Integer.toString(freq_spin.getSelectedItemPosition()));
 //                System.out.println("weekday: " + weekdata);
                 savedStates.putString("set_interact_rmd","1");
                 ((NavigationHost) getActivity()).navigateTo("qSFrag",
                         R.id.fragCon_m,true, "qSFrag", savedStates);
             }
         });
+
+//        start the video as soon as the frag is created
+        startVid();
 
         return view;
     }
@@ -232,6 +265,7 @@ public class fragment_ddl_repeats extends myFragment{
         } else{
             sw_r.setChecked(true);
             week_days.setVisibility(View.VISIBLE);
+//            Toast.makeText(getActivity(), "Set Reminder Repeats: Off!", Toast.LENGTH_SHORT).show();
         }
         if(sw_see_val.equals("0")){
             sw_see.setChecked(false);
@@ -242,6 +276,10 @@ public class fragment_ddl_repeats extends myFragment{
 
         if (!num_interact.equals("0")){
             num_interc_view.setSelection(Integer.parseInt(num_interact));
+        }
+
+        if(freq!=null){
+            freq_spin.setSelection(Integer.parseInt(freq));
         }
 
     }
@@ -300,6 +338,9 @@ public class fragment_ddl_repeats extends myFragment{
             }
         });
 
+//        set clock text size
+        scrollChoiceHour.setItemTextSize(40);
+        scrollChoiceMins.setItemTextSize(40);
     }
 
     private void loadDatas(){
@@ -424,7 +465,12 @@ public class fragment_ddl_repeats extends myFragment{
         savedStates.putString("num_interac",Integer.toString(num_interc_view.getSelectedItemPosition()));
 //                System.out.println("weekday: " + weekdata);
         savedStates.putString("set_interact_rmd","1");
+        savedStates.putString("freq_spin",Integer.toString(freq_spin.getSelectedItemPosition()));
 
+    }
+
+    public void startVid(){
+        vid_view.start();
     }
 
 

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:background="?attr/selectableItemBackground"
-        android:text="Regular Time-based Reminder"
+        android:text="Time-based Reminder"
         android:textColor="@color/pureBlack"
         android:textSize="@dimen/inst_text_size" />
 

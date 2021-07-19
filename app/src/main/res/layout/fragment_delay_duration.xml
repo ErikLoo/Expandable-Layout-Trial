@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".delayDurationFrag">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,6 +12,7 @@
 
         <HorizontalScrollView
             android:id="@+id/horizontalScrollView"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -81,11 +82,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="provide a reminder when the images above"
-            android:textAlignment="center"
+            android:text="Provide a reminder when the states"
             android:textSize="18dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.616"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
@@ -94,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="are"
+            android:text="(selected above) are"
             android:textAlignment="center"
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="@+id/textView4"
@@ -111,11 +109,20 @@
             android:shadowColor="#00696666"
             android:showText="true"
             android:switchTextAppearance="@style/SwitchTextAppearance"
-            android:textOff="not seen"
+            android:textOff="  not seen"
             android:textOn="seen"
             android:thumbTint="@color/transparent"
             android:trackTint="@color/track_selector"
             app:layout_constraintStart_toEndOf="@+id/textView6"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="."
+            android:textSize="18dp"
+            app:layout_constraintStart_toEndOf="@+id/sw_show2"
             app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -127,20 +134,12 @@
             app:layout_constraintTop_toBottomOf="@+id/textView6"
             tools:layout_editor_absoluteX="0dp">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#c0c0c0" />
 
             <include
                 layout="@layout/set_delay_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#c0c0c0" />
 
             <include
                 android:id="@+id/hold_off_layout"
@@ -149,27 +148,21 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#c0c0c0" />
 
             <include
                 layout="@layout/set_duration_bar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="2dp"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#c0c0c0" />
 
             <include
                 android:id="@+id/in_view_layout"
                 layout="@layout/in_my_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -187,6 +180,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#c0c0c0"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

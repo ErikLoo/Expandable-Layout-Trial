@@ -114,7 +114,7 @@ public class delayDurationFrag extends myFragment {
         }
 
         setup_sw_sp();
-        setUpImage(view,ids,imgStat);
+//        setUpImage(view,ids,imgStat);
 
         sw_dl.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -123,8 +123,10 @@ public class delayDurationFrag extends myFragment {
                 if (hold_off_remind.getVisibility()==View.VISIBLE) {
                     hold_off_remind.setVisibility(View.GONE);
                     set_dl = "0";
+                    Toast.makeText(getActivity(), "Set Fire-off Delay: Off!", Toast.LENGTH_SHORT).show();
                 }else{
                     hold_off_remind.setVisibility(View.VISIBLE);
+                    Toast.makeText(getActivity(), "Set Fire-off Delay: On!", Toast.LENGTH_SHORT).show();
                     set_dl = "1";
 
                 }
@@ -137,10 +139,12 @@ public class delayDurationFrag extends myFragment {
                 if (in_my_view.getVisibility()==View.VISIBLE){
                     in_my_view.setVisibility(View.GONE);
                     set_dur = "0";
+                    Toast.makeText(getActivity(), "Set View Duration: Off!", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     in_my_view.setVisibility(View.VISIBLE);
                     set_dur = "1";
+                    Toast.makeText(getActivity(), "Set View Duration: On!", Toast.LENGTH_SHORT).show();
 
                 }
             }

@@ -18,7 +18,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Type in your reminder message"
+            android:text="Type in a Reminder Message"
             android:textColor="@android:color/black"
             android:textSize="@dimen/inst_text_size" />
 
